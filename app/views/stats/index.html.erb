@@ -17,7 +17,7 @@
   </div>
 
   <div class="pb-grid">
-    <% RunMark.best_homologated_common_distances.each do |run_mark| %>
+    <% @best_marks.each do |run_mark| %>
       <% distance_data = COMMON_RACE_DISTANCES[run_mark.distance.to_s] %>
       <%= link_to run_mark, class: "pb-card", style: "--pb-color: #{distance_data[:colors][:dark]}; --pb-color-light: #{distance_data[:colors][:light]}" do %>
         <div class="pb-card-distance"><%= distance_data[:name] %></div>
@@ -43,7 +43,7 @@
       Estimated Paces
     </h2>
   </div>
-  <% run_mark = RunMark.homologated.last %>
+  <% run_mark = @last_homologated %>
   <p class="stats-section-description">Based on <%= run_mark.full_name %></p>
   <div class="estimated-paces-list">
     <% EstimatedPaces.for(run_mark).each do |distance, time| %>
@@ -72,7 +72,7 @@
       <div class="top-three-row" style="--tt-color: <%= distance_data[:colors][:dark] %>; --tt-color-light: <%= distance_data[:colors][:light] %>">
         <h3 class="top-three-row-title"><%= distance_data[:name] %></h3>
         <div class="top-three-items">
-          <% RunMark.where(distance: distance).order(:time).limit(3).each_with_index do |run_mark, index| %>
+          <% @top_marks_by_distance[distance].each_with_index do |run_mark, index| %>
             <%= link_to run_mark, class: "top-three-item" do %>
               <span class="top-three-rank"><%= index + 1 %></span>
               <div class="top-three-info">

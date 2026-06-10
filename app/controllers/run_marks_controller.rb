@@ -3,7 +3,7 @@ class RunMarksController < ApplicationController
 
   # GET /run_marks or /run_marks.json
   def index
-    @run_marks = RunMark.ordered
+    @run_marks = current_user.run_marks.ordered
   end
 
   # GET /run_marks/1 or /run_marks/1.json
@@ -21,7 +21,7 @@ class RunMarksController < ApplicationController
 
   # POST /run_marks or /run_marks.json
   def create
-    @run_mark = RunMark.new(run_mark_params)
+    @run_mark = current_user.run_marks.new(run_mark_params)
 
     respond_to do |format|
       if @run_mark.save
@@ -60,7 +60,7 @@ class RunMarksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_run_mark
-      @run_mark = RunMark.find(params.expect(:id))
+      @run_mark = current_user.run_marks.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

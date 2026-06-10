@@ -1,5 +1,5 @@
 <%= render layout: "stats/card", locals: { title: "Personal bests", subtitle: "Best paces on homologated races" } do %>
-    <% RunMark.best_homologated_common_distances.each do |run_mark| %>
+    <% @best_marks.each do |run_mark| %>
         <%= link_to run_mark do %>
           <div class="pb-card-mark flex items-center justify-between border rounded-md pi-3 pb-1 bg-shade shadow-xs">
             <div class="flex flex-col items-center" style="color: <%= COMMON_RACE_DISTANCES[run_mark.distance.to_s][:colors][:dark]%>">
