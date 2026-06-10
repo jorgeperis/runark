@@ -1,3 +1,4 @@
+<% if @last_homologated %>
 <% run_mark = @last_homologated %>
 <%= render layout: "stats/card", locals: { title: "Estimated paces", subtitle: "Based on #{run_mark.full_name} running #{decorated_distance_for(run_mark.distance)} at #{decorated_time_for(run_mark.pace)}" } do %>
   <% EstimatedPaces.for(run_mark).each do |distance, time| %>
@@ -9,4 +10,5 @@
         <span class="text-xl font-semibold"><%= decorated_time_for((time / distance.to_f).round) %></span>
       </div>
     <% end %>
+<% end %>
 <% end %>
