@@ -31,7 +31,10 @@
   --color-filter-negative: invert(22%) sepia(85%) saturate(1790%) hue-rotate(339deg) brightness(105%) contrast(108%);
   --color-filter-positive: invert(44%) sepia(89%) saturate(409%) hue-rotate(89deg) brightness(94%) contrast(97%);
 
-  @media (prefers-color-scheme: dark) {
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
     --color-bg: #111827;
     --color-bg-subtle: #0F172A;
     --color-page-bg: #070B14;
@@ -56,6 +59,32 @@
     --color-filter-negative: invert(15%) sepia(65%) saturate(2067%) hue-rotate(339deg) brightness(102%) contrast(97%);
     --color-filter-positive: invert(23%) sepia(62%) saturate(554%) hue-rotate(91deg) brightness(93%) contrast(91%);
   }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #111827;
+  --color-bg-subtle: #0F172A;
+  --color-page-bg: #070B14;
+  --color-text: #F1F5F9;
+  --color-text-reversed: #0F172A;
+  --color-text-subtle: #94A3B8;
+  --color-link: var(--color-accent-light);
+  --color-border-light: #1E293B;
+  --color-border: #334155;
+  --color-border-dark: #64748B;
+  --color-selected: #2A1A14;
+  --color-selected-dark: #3D2A1F;
+  --color-highlight: var(--yellow-900);
+
+  --color-primary: var(--color-accent);
+  --color-secondary: #1E293B;
+  --color-negative: var(--red-900);
+  --color-positive: var(--green-900);
+
+  --color-filter-text: invert(1);
+  --color-filter-text-reversed: invert(0);
+  --color-filter-negative: invert(15%) sepia(65%) saturate(2067%) hue-rotate(339deg) brightness(102%) contrast(97%);
+  --color-filter-positive: invert(23%) sepia(62%) saturate(554%) hue-rotate(91deg) brightness(93%) contrast(91%);
 }
 
 * {

@@ -247,11 +247,18 @@
 .stats-section--highlight {
   background: linear-gradient(160deg, #FFF9F7 0%, #FFFBF9 100%);
   border-color: #FFD4C4;
+}
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .stats-section--highlight {
     background: linear-gradient(160deg, #1F120E 0%, #1A0F0C 100%);
     border-color: #5C3020;
   }
+}
+
+[data-theme="dark"] .stats-section--highlight {
+  background: linear-gradient(160deg, #1F120E 0%, #1A0F0C 100%);
+  border-color: #5C3020;
 }
 
 .stats-section-header {
