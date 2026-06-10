@@ -2,12 +2,15 @@ class RunMark < ApplicationRecord
   belongs_to :user
   belongs_to :race, counter_cache: true
 
-  validates :edition, presence: true, uniqueness: { scope: :race_id }
+  validates :edition, presence: true, uniqueness: { scope: :race_id },
+    numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :date, presence: true
   validates :time, presence: true, numericality: { greater_than: 0 }
   validates :distance, numericality: { greater_than: 0 }
   validates :homologated, inclusion: { in: [ true, false ] }
-  validates :source, presence: true
+  validates :source, presence: true, inclusion: { in: %w[chip gun] }
+
+  validate :race_belongs_to_user
 
   before_validation :set_defaults_from_race, on: :create
 
@@ -45,6 +48,10 @@ class RunMark < ApplicationRecord
   end
 
   private
+
+  def race_belongs_to_user
+    errors.add(:race, :invalid) if race && user_id != race.user_id
+  end
 
   def set_defaults_from_race
     self.distance ||= race.distance

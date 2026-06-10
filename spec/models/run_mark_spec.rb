@@ -52,6 +52,40 @@ RSpec.describe RunMark, type: :model do
       expect(build(:run_mark, source: "")).not_to be_valid
     end
 
+    it "is invalid with a non-integer edition" do
+      expect(build(:run_mark, edition: 1.5)).not_to be_valid
+    end
+
+    it "is invalid with edition < 1" do
+      expect(build(:run_mark, edition: 0)).not_to be_valid
+    end
+
+    it "is valid with edition = 1" do
+      expect(build(:run_mark, edition: 1)).to be_valid
+    end
+
+    it "is invalid with an unrecognised source value" do
+      expect(build(:run_mark, source: "manual")).not_to be_valid
+    end
+
+    it "is valid with source 'gun'" do
+      expect(build(:run_mark, source: "gun")).to be_valid
+    end
+
+    it "is invalid when the race belongs to a different user" do
+      user_a = create(:user)
+      user_b = create(:user)
+      race = create(:race, user: user_a)
+      run_mark = build(:run_mark, race: race, user: user_b)
+      expect(run_mark).not_to be_valid
+    end
+
+    it "is valid when the race and run_mark belong to the same user" do
+      user = create(:user)
+      race = create(:race, user: user)
+      expect(build(:run_mark, race: race, user: user)).to be_valid
+    end
+
     it "is invalid with an unrecognised homologated value" do
       run_mark = create(:run_mark)
       run_mark.homologated = nil
