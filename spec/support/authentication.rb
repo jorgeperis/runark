@@ -1,7 +1,8 @@
 module AuthenticationHelpers
+  # Uses the app's own login endpoint so the signed cookie is set correctly.
+  # Factory users are built with password "password".
   def sign_in(user)
-    session_record = create(:session, user: user)
-    cookies.signed[:session_id] = session_record.id
+    post session_path, params: { email_address: user.email_address, password: "password" }
   end
 end
 
