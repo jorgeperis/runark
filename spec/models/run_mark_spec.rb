@@ -1,0 +1,128 @@
+require "rails_helper"
+
+RSpec.describe RunMark, type: :model do
+  describe "associations" do
+    it "belongs to a race" do
+      run_mark = create(:run_mark)
+      expect(run_mark.race).to be_a(Race)
+    end
+
+    it "belongs to a user" do
+      run_mark = create(:run_mark)
+      expect(run_mark.user).to be_a(User)
+    end
+  end
+
+  describe "validations" do
+    it "is invalid without an edition" do
+      expect(build(:run_mark, edition: nil)).not_to be_valid
+    end
+
+    it "is invalid when edition is duplicated within the same race" do
+      race = create(:race)
+      create(:run_mark, race: race, edition: 1)
+      expect(build(:run_mark, race: race, edition: 1)).not_to be_valid
+    end
+
+    it "allows the same edition number in different races" do
+      race_a = create(:race, name: "Race A")
+      race_b = create(:race, name: "Race B", user_id: race_a.user_id)
+      create(:run_mark, race: race_a, edition: 1)
+      expect(build(:run_mark, race: race_b, edition: 1)).to be_valid
+    end
+
+    it "is invalid without a date" do
+      expect(build(:run_mark, date: nil)).not_to be_valid
+    end
+
+    it "is invalid without a time" do
+      expect(build(:run_mark, time: nil)).not_to be_valid
+    end
+
+    it "is invalid with time <= 0" do
+      expect(build(:run_mark, time: 0)).not_to be_valid
+      expect(build(:run_mark, time: -1)).not_to be_valid
+    end
+
+    it "is invalid with distance <= 0" do
+      expect(build(:run_mark, distance: 0)).not_to be_valid
+    end
+
+    it "is invalid without a source" do
+      expect(build(:run_mark, source: "")).not_to be_valid
+    end
+
+    it "is invalid with an unrecognised homologated value" do
+      run_mark = create(:run_mark)
+      run_mark.homologated = nil
+      expect(run_mark).not_to be_valid
+    end
+  end
+
+  describe "callbacks" do
+    describe "#set_defaults_from_race" do
+      let(:race) { create(:race, distance: 21.097, homologated: true) }
+
+      it "inherits distance from the race when not provided" do
+        run_mark = create(:run_mark, race: race, distance: nil)
+        expect(run_mark.distance).to eq(21.097)
+      end
+
+      it "inherits homologated from the race when not provided" do
+        run_mark = create(:run_mark, race: race, homologated: nil)
+        expect(run_mark.homologated).to eq(true)
+      end
+
+      it "does not overwrite an explicitly provided distance" do
+        run_mark = create(:run_mark, race: race, distance: 5.0)
+        expect(run_mark.distance).to eq(5.0)
+      end
+
+      it "does not run on update" do
+        run_mark = create(:run_mark, race: race)
+        run_mark.update!(distance: 5.0)
+        expect(run_mark.reload.distance).to eq(5.0)
+      end
+    end
+  end
+
+  describe "scopes" do
+    describe ".ordered" do
+      it "returns run_marks newest date first" do
+        race = create(:race)
+        old = create(:run_mark, race: race, date: 1.year.ago, edition: 1)
+        recent = create(:run_mark, race: race, date: 1.week.ago, edition: 2)
+        expect(RunMark.ordered).to eq([ recent, old ])
+      end
+    end
+  end
+
+  describe "#full_name" do
+    it "combines edition and race name" do
+      race = create(:race, name: "Madrid Marathon")
+      run_mark = create(:run_mark, race: race, edition: 3)
+      expect(run_mark.full_name).to eq("3ª Madrid Marathon")
+    end
+  end
+
+  describe "#pace" do
+    it "returns seconds per km rounded to the nearest integer" do
+      run_mark = build(:run_mark, time: 3600, distance: 10.0)
+      expect(run_mark.pace).to eq(360)
+    end
+
+    it "rounds correctly when the result is not exact" do
+      run_mark = build(:run_mark, time: 3661, distance: 10.0)
+      expect(run_mark.pace).to eq(366)
+    end
+  end
+
+  describe "#time_hours / #time_minutes / #time_seconds" do
+    it "correctly decomposes a time into h/m/s components" do
+      run_mark = build(:run_mark, time: 5025) # 1h 23m 45s
+      expect(run_mark.time_hours).to eq(1)
+      expect(run_mark.time_minutes).to eq(23)
+      expect(run_mark.time_seconds).to eq(45)
+    end
+  end
+end
