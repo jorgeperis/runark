@@ -39,5 +39,3 @@ COMMON_RACE_DISTANCES = {
 }.freeze
 
 FAVOURITE_RACE_DISTANCES = COMMON_RACE_DISTANCES.select { |distance, _| %w[5.0 10.0 21.097 42.195].include?(distance) }.freeze
-
-MAX_KM_FOR_SHOES = 1000.freeze

@@ -15,6 +15,3 @@
 #   inflect.acronym "RESTful"
 # end
 #
-ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular "shoes", "shoes"
-end

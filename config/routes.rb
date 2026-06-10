@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   root "stats#index"
 
   resources :stats, only: [ :index ]
-  resources :shoes do
-    resources :montly_distances, except: [ :index, :show ]
-  end
   resources :run_marks
   resources :races
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
