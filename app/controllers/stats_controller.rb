@@ -1,5 +1,9 @@
 class StatsController < ApplicationController
-  # GET /stats or /stats.json
-
-  private
+  def index
+    @best_marks = current_user.run_marks.best_homologated_common_distances
+    @last_homologated = current_user.run_marks.homologated.last
+    @top_marks_by_distance = FAVOURITE_RACE_DISTANCES.keys.index_with do |distance|
+      current_user.run_marks.where(distance: distance).order(:time).limit(3)
+    end
+  end
 end

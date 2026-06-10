@@ -3,7 +3,7 @@ class RacesController < ApplicationController
 
   # GET /races or /races.json
   def index
-    @races = Race.all
+    @races = current_user.races
   end
 
   # GET /races/1 or /races/1.json
@@ -21,7 +21,7 @@ class RacesController < ApplicationController
 
   # POST /races or /races.json
   def create
-    @race = Race.new(race_params)
+    @race = current_user.races.new(race_params)
 
     respond_to do |format|
       if @race.save
@@ -60,7 +60,7 @@ class RacesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_race
-      @race = Race.find(params.expect(:id))
+      @race = current_user.races.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
