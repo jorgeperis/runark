@@ -4,7 +4,6 @@ FactoryBot.define do
     location { "Madrid" }
     distance { 10.0 }
     homologated { true }
-    # user_id is set directly until belongs_to :user is added in Phase 1
-    user_id { create(:user).id }
+    association :user
   end
 end

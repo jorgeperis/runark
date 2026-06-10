@@ -9,7 +9,6 @@ FactoryBot.define do
     distance { nil }
     homologated { nil }
 
-    # user_id mirrors the race until belongs_to :user is added in Phase 1
-    after(:build) { |run_mark| run_mark.user_id ||= run_mark.race&.user_id }
+    after(:build) { |run_mark| run_mark.user ||= run_mark.race&.user }
   end
 end

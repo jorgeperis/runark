@@ -1,4 +1,5 @@
 class RunMark < ApplicationRecord
+  belongs_to :user
   belongs_to :race, counter_cache: true
 
   validates :edition, presence: true, uniqueness: { scope: :race_id }
