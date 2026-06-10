@@ -163,3 +163,10 @@
     padding: var(--size-4);
   }
 }
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  color: var(--color-text-subtle);
+}

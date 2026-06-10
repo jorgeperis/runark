@@ -20,6 +20,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
 
+    <script>
+      (function() {
+        var theme = localStorage.getItem("theme");
+        if (theme) document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <%= stylesheet_link_tag "css-zero/reset", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "css-zero/variables", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -58,9 +64,14 @@
             </ul>
           </nav>
         </div>
+        <div class="theme-toggle" data-controller="theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <input type="checkbox" class="switch" data-theme-target="switch" data-action="change->theme#toggle" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </div>
         <div class="flex items-center">
           <% if Current.user %>
-            <span class="text-sm mie-4"><%= Current.user.email_address %></span>
+            <span class="text-sm mie-4 user-email"><%= Current.user.email_address %></span>
             <%= button_to 'Log out', session_path, method: :delete, class: "btn btn--secondary" %>
           <% else %>
             <%= link_to 'Log in', new_session_path, class: "btn btn--primary" %>
