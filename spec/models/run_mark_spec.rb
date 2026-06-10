@@ -151,6 +151,20 @@ RSpec.describe RunMark, type: :model do
     end
   end
 
+  describe ".time_from_components" do
+    it "converts h/m/s into total seconds" do
+      expect(RunMark.time_from_components(hours: 1, minutes: 23, seconds: 45)).to eq(5025)
+    end
+
+    it "treats nil as zero" do
+      expect(RunMark.time_from_components(hours: nil, minutes: nil, seconds: nil)).to eq(0)
+    end
+
+    it "accepts string inputs as received from form params" do
+      expect(RunMark.time_from_components(hours: "1", minutes: "30", seconds: "0")).to eq(5400)
+    end
+  end
+
   describe "#time_hours / #time_minutes / #time_seconds" do
     it "correctly decomposes a time into h/m/s components" do
       run_mark = build(:run_mark, time: 5025) # 1h 23m 45s

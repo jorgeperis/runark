@@ -47,6 +47,10 @@ class RunMark < ApplicationRecord
     time % 60
   end
 
+  def self.time_from_components(hours:, minutes:, seconds:)
+    hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
+  end
+
   private
 
   def race_belongs_to_user
