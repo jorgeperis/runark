@@ -74,7 +74,7 @@
       <div class="top-three-row" style="--tt-color: <%= distance_data[:colors][:dark] %>; --tt-color-light: <%= distance_data[:colors][:light] %>">
         <h3 class="top-three-row-title"><%= distance_data[:name] %></h3>
         <div class="top-three-items">
-          <% @top_marks_by_distance[distance].each_with_index do |run, index| %>
+          <% @top_runs_by_distance[distance].each_with_index do |run, index| %>
             <%= link_to run, class: "top-three-item" do %>
               <span class="top-three-rank"><%= index + 1 %></span>
               <div class="top-three-info">
