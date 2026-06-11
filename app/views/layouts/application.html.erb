@@ -59,7 +59,7 @@
             <ul class="flex items-center mis-6" style="gap: 4px">
               <li><%= link_to 'Stats', root_path, class: "nav-link #{current_page?(root_path) ? 'nav-link--active' : ''}" %></li>
               <li><%= link_to 'Races', races_path, class: "nav-link #{current_page?(races_path) ? 'nav-link--active' : ''}" %></li>
-              <li><%= link_to 'Run marks', run_marks_path, class: "nav-link #{current_page?(run_marks_path) ? 'nav-link--active' : ''}" %></li>
+              <li><%= link_to 'Runs', runs_path, class: "nav-link #{current_page?(runs_path) ? 'nav-link--active' : ''}" %></li>
             </ul>
           </nav>
         </div>
@@ -101,7 +101,7 @@
         </svg>
         Races
       <% end %>
-      <%= link_to run_marks_path, class: ("active" if current_page?(run_marks_path)) do %>
+      <%= link_to runs_path, class: ("active" if current_page?(runs_path)) do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "stats#index"
 
   resources :stats, only: [ :index ]
-  resources :run_marks
+  resources :runs
   resources :races
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

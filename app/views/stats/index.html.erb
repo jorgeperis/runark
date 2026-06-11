@@ -17,18 +17,18 @@
   </div>
 
   <div class="pb-grid">
-    <% @best_marks.each do |run_mark| %>
-      <% distance_data = COMMON_RACE_DISTANCES[run_mark.distance.to_s] %>
-      <%= link_to run_mark, class: "pb-card", style: "--pb-color: #{distance_data[:colors][:dark]}; --pb-color-light: #{distance_data[:colors][:light]}" do %>
+    <% @best_marks.each do |run| %>
+      <% distance_data = COMMON_RACE_DISTANCES[run.distance.to_s] %>
+      <%= link_to run, class: "pb-card", style: "--pb-color: #{distance_data[:colors][:dark]}; --pb-color-light: #{distance_data[:colors][:light]}" do %>
         <div class="pb-card-distance"><%= distance_data[:name] %></div>
-        <div class="pb-card-time"><%= decorated_time_for(run_mark.time) %></div>
+        <div class="pb-card-time"><%= decorated_time_for(run.time) %></div>
         <div class="pb-card-pace">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="pb-card-pace-icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
           </svg>
-          <%= decorated_time_for(run_mark.pace) %>/km
+          <%= decorated_time_for(run.pace) %>/km
         </div>
-        <div class="pb-card-date"><%= run_mark.date.strftime("%b %Y") %></div>
+        <div class="pb-card-date"><%= run.date.strftime("%b %Y") %></div>
       <% end %>
     <% end %>
   </div>
@@ -44,10 +44,10 @@
     </h2>
   </div>
   <% if @last_homologated %>
-  <% run_mark = @last_homologated %>
-  <p class="stats-section-description">Based on <%= run_mark.full_name %></p>
+  <% run = @last_homologated %>
+  <p class="stats-section-description">Based on <%= run.full_name %></p>
   <div class="estimated-paces-list">
-    <% EstimatedPaces.for(run_mark).each do |distance, time| %>
+    <% EstimatedPaces.for(run).each do |distance, time| %>
       <% distance_data = COMMON_RACE_DISTANCES[distance] %>
       <div class="estimated-pace-item" style="--ep-color: <%= distance_data[:colors][:dark] %>">
         <span class="estimated-pace-distance"><%= distance_data[:name] %></span>
@@ -74,15 +74,15 @@
       <div class="top-three-row" style="--tt-color: <%= distance_data[:colors][:dark] %>; --tt-color-light: <%= distance_data[:colors][:light] %>">
         <h3 class="top-three-row-title"><%= distance_data[:name] %></h3>
         <div class="top-three-items">
-          <% @top_marks_by_distance[distance].each_with_index do |run_mark, index| %>
-            <%= link_to run_mark, class: "top-three-item" do %>
+          <% @top_marks_by_distance[distance].each_with_index do |run, index| %>
+            <%= link_to run, class: "top-three-item" do %>
               <span class="top-three-rank"><%= index + 1 %></span>
               <div class="top-three-info">
-                <span class="top-three-time"><%= decorated_time_for(run_mark.time) %></span>
-                <span class="top-three-pace"><%= decorated_time_for(run_mark.pace) %>/km</span>
+                <span class="top-three-time"><%= decorated_time_for(run.time) %></span>
+                <span class="top-three-pace"><%= decorated_time_for(run.pace) %>/km</span>
               </div>
-              <span class="top-three-name"><%= run_mark.full_name %></span>
-              <span class="top-three-date"><%= run_mark.date.strftime("%d %b %Y") %></span>
+              <span class="top-three-name"><%= run.full_name %></span>
+              <span class="top-three-date"><%= run.date.strftime("%d %b %Y") %></span>
             <% end %>
           <% end %>
         </div>

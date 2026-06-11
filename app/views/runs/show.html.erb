@@ -1,0 +1,46 @@
+<% if notice.present? %>
+  <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
+<% end %>
+
+<div class="run-hero">
+  <div class="run-hero-header">
+    <h1 class="run-race-name"><%= @run.race.name %></h1>
+    <span class="run-date"><%= @run.date.strftime("%B %d, %Y") %></span>
+  </div>
+
+  <div class="run-time-display">
+    <span class="run-time-label">Finish Time</span>
+    <span class="run-time"><%= decorated_time_for(@run.time) %></span>
+  </div>
+</div>
+
+<div class="run-stats">
+  <div class="run-stat-card">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="run-stat-icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+    </svg>
+    <span class="run-stat-value"><%= decorated_distance_for(@run.distance) %></span>
+    <span class="run-stat-label">Distance</span>
+  </div>
+
+  <div class="run-stat-card">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="run-stat-icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+    </svg>
+    <span class="run-stat-value"><%= decorated_time_for(@run.pace) %></span>
+    <span class="run-stat-label">Pace /km</span>
+  </div>
+
+  <div class="run-stat-card">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="run-stat-icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+    </svg>
+    <span class="run-stat-value"><%= @run.homologated ? "Yes" : "No" %></span>
+    <span class="run-stat-label">Homologated</span>
+  </div>
+</div>
+
+<div class="page-actions">
+  <%= link_to "Edit", edit_run_path(@run), class: "btn btn--primary" %>
+  <%= button_to "Delete", @run, method: :delete, class: "btn btn--negative", data: { turbo_confirm: "Are you sure?" } %>
+</div>

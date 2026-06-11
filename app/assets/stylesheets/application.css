@@ -70,8 +70,8 @@
   }
 }
 
-/* Run Mark Show Page */
-.run-mark-hero {
+/* Run Show Page */
+.run-hero {
   background: linear-gradient(135deg, var(--color-accent) 0%, #FF8C42 100%);
   border-radius: var(--rounded-2xl);
   padding: var(--size-8);
@@ -80,36 +80,28 @@
   text-align: center;
 }
 
-.run-mark-hero-header {
+.run-hero-header {
   margin-bottom: var(--size-4);
 }
 
-.run-mark-edition {
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 600;
-  opacity: 0.8;
-}
-
-.run-mark-race-name {
+.run-race-name {
   font-size: var(--text-2xl);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin: var(--size-1) 0;
 }
 
-.run-mark-date {
+.run-date {
   font-size: var(--text-sm);
   opacity: 0.8;
   font-weight: 400;
 }
 
-.run-mark-time-display {
+.run-time-display {
   margin-top: var(--size-5);
 }
 
-.run-mark-time-label {
+.run-time-label {
   display: block;
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -119,29 +111,21 @@
   margin-bottom: var(--size-2);
 }
 
-.run-mark-time {
+.run-time {
   font-size: clamp(3rem, 10vw, 4.5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
 }
 
-.run-mark-source {
-  display: block;
-  font-size: var(--text-xs);
-  opacity: 0.65;
-  margin-top: var(--size-2);
-  font-weight: 400;
-}
-
-.run-mark-stats {
+.run-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--size-4);
   margin-bottom: var(--size-6);
 }
 
-.run-mark-stat-card {
+.run-stat-card {
   background-color: var(--color-bg);
   border: 1px solid var(--color-border-light);
   border-radius: var(--rounded-xl);
@@ -154,20 +138,20 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
 }
 
-.run-mark-stat-icon {
+.run-stat-icon {
   width: 26px;
   height: 26px;
   color: var(--color-accent);
 }
 
-.run-mark-stat-value {
+.run-stat-value {
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: -0.02em;
 }
 
-.run-mark-stat-label {
+.run-stat-label {
   font-size: var(--text-xs);
   color: var(--color-text-subtle);
   text-transform: uppercase;
@@ -175,20 +159,20 @@
   font-weight: 600;
 }
 
-.run-mark-details {
+.run-details {
   display: flex;
   flex-wrap: wrap;
   gap: var(--size-4);
   margin-bottom: var(--size-4);
 }
 
-.run-mark-detail {
+.run-detail {
   display: flex;
   flex-direction: column;
   gap: var(--size-1);
 }
 
-.run-mark-detail-label {
+.run-detail-label {
   font-size: var(--text-xs);
   color: var(--color-text-subtle);
   text-transform: uppercase;
@@ -196,21 +180,21 @@
   font-weight: 600;
 }
 
-.run-mark-detail-value {
+.run-detail-value {
   font-weight: 600;
 }
 
 @media (max-width: 48rem) {
-  .run-mark-stats {
+  .run-stats {
     grid-template-columns: 1fr;
   }
 
-  .run-mark-hero {
+  .run-hero {
     padding: var(--size-6);
     border-radius: var(--rounded-xl);
   }
 
-  .run-mark-race-name {
+  .run-race-name {
     font-size: var(--text-xl);
   }
 }

@@ -1,0 +1,10 @@
+<% content_for :title, "Editing run" %>
+
+<h1 class="font-bold text-4xl mbe-4">Editing run</h1>
+
+<%= render "form", run: @run %>
+
+<div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
+  <%= link_to "Show this run", @run, class: "btn" %>
+  <%= link_to "Back to runs", runs_path, class: "btn" %>
+</div>

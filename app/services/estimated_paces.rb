@@ -1,10 +1,10 @@
 class EstimatedPaces
-  def self.for(run_mark, distances = FAVOURITE_RACE_DISTANCES.keys)
-    self.new(run_mark, distances).calculate
+  def self.for(run, distances = FAVOURITE_RACE_DISTANCES.keys)
+    self.new(run, distances).calculate
   end
 
-  def initialize(run_mark, distances)
-    @run_mark = run_mark
+  def initialize(run, distances)
+    @run = run
     @distances = distances
   end
 
@@ -18,6 +18,6 @@ class EstimatedPaces
 
   def calculate_time(distance)
     # Riegel Formula: https://en.wikipedia.org/wiki/Peter_Riegel
-    @run_mark.time * ((distance.to_f / @run_mark.distance) ** 1.06)
+    @run.time * ((distance.to_f / @run.distance) ** 1.06)
   end
 end

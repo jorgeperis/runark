@@ -23,10 +23,10 @@
       </div>
       <h3 class="race-card-name"><%= race.name %></h3>
       <p class="race-card-location"><%= race.location %></p>
-      <% if race.best_run_mark %>
+      <% if race.best_run %>
         <div class="race-card-best">
           <span class="race-card-best-label">Best</span>
-          <span class="race-card-best-time"><%= decorated_time_for(race.best_run_mark.time) %></span>
+          <span class="race-card-best-time"><%= decorated_time_for(race.best_run.time) %></span>
         </div>
       <% end %>
     <% end %>

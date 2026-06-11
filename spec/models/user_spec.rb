@@ -14,11 +14,11 @@ RSpec.describe User, type: :model do
       expect { user.destroy }.to change(Race, :count).by(-1)
     end
 
-    it "has many run_marks and destroys them on delete" do
+    it "has many runs and destroys them on delete" do
       user = create(:user)
       race = create(:race, user_id: user.id)
-      create(:run_mark, race: race)
-      expect { user.destroy }.to change(RunMark, :count).by(-1)
+      create(:run, race: race)
+      expect { user.destroy }.to change(Run, :count).by(-1)
     end
   end
 

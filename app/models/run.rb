@@ -1,4 +1,4 @@
-class RunMark < ApplicationRecord
+class Run < ApplicationRecord
   belongs_to :user
   belongs_to :race, counter_cache: true
 
@@ -17,7 +17,7 @@ class RunMark < ApplicationRecord
   scope :favourite_distances, -> { where(distance: FAVOURITE_RACE_DISTANCES.keys) }
 
   scope :with_min_time_per_distance, -> {
-    order(:distance, :time).where("time = (SELECT MIN(time) FROM run_marks AS rm WHERE rm.distance = run_marks.distance)")
+    order(:distance, :time).where("time = (SELECT MIN(time) FROM runs AS rm WHERE rm.distance = runs.distance)")
   }
 
   scope :best_homologated_common_distances, -> {

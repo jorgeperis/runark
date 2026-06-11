@@ -7,10 +7,10 @@ RSpec.describe Race, type: :model do
       expect(race.user).to be_a(User)
     end
 
-    it "has many run_marks and destroys them on delete" do
+    it "has many runs and destroys them on delete" do
       race = create(:race)
-      create(:run_mark, race: race)
-      expect { race.destroy }.to change(RunMark, :count).by(-1)
+      create(:run, race: race)
+      expect { race.destroy }.to change(Run, :count).by(-1)
     end
   end
 
@@ -54,16 +54,16 @@ RSpec.describe Race, type: :model do
     end
   end
 
-  describe "#best_run_mark" do
-    it "returns the run_mark with the lowest time" do
+  describe "#best_run" do
+    it "returns the run with the lowest time" do
       race = create(:race)
-      slow = create(:run_mark, race: race, time: 4000, date: 2.years.ago)
-      fast = create(:run_mark, race: race, time: 3600, date: 1.year.ago)
-      expect(race.best_run_mark).to eq(fast)
+      slow = create(:run, race: race, time: 4000, date: 2.years.ago)
+      fast = create(:run, race: race, time: 3600, date: 1.year.ago)
+      expect(race.best_run).to eq(fast)
     end
 
-    it "returns nil when the race has no run_marks" do
-      expect(create(:race).best_run_mark).to be_nil
+    it "returns nil when the race has no runs" do
+      expect(create(:race).best_run).to be_nil
     end
   end
 end

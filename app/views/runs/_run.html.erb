@@ -1,18 +1,18 @@
-<div id="<%= dom_id run_mark %>" class="flex flex-col gap">
+<div id="<%= dom_id run %>" class="flex flex-col gap">
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Date:</h4>
-    <p class="leading-none"><%= run_mark.date %></p>
+    <p class="leading-none"><%= run.date %></p>
   </div>
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Distance:</h4>
-    <p class="leading-none"><%= run_mark.distance %></p>
+    <p class="leading-none"><%= run.distance %></p>
   </div>
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Homologated:</h4>
-    <p class="leading-none"><%= run_mark.homologated %></p>
+    <p class="leading-none"><%= run.homologated %></p>
   </div>
   <div class="flex flex-col gap-half">
     <h4 class="font-medium leading-none">Time:</h4>
-    <p class="leading-none"><%= decorated_time_for(run_mark.time) %></p>
+    <p class="leading-none"><%= decorated_time_for(run.time) %></p>
   </div>
 </div>
