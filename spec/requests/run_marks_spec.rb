@@ -56,10 +56,9 @@ RSpec.describe "RunMarks", type: :request do
     it "assigns the new run_mark to the current user" do
       post run_marks_path, params: {
         run_mark: {
-          race_id: race.id, edition: 1, date: Date.current,
+          race_id: race.id, date: Date.current,
           distance: 10.0, homologated: true,
-          time_hours: 1, time_minutes: 0, time_seconds: 0,
-          source: "chip"
+          time_hours: 1, time_minutes: 0, time_seconds: 0
         }
       }
       expect(RunMark.last.user).to eq(user)

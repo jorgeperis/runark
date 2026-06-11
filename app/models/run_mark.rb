@@ -2,13 +2,10 @@ class RunMark < ApplicationRecord
   belongs_to :user
   belongs_to :race, counter_cache: true
 
-  validates :edition, presence: true, uniqueness: { scope: :race_id },
-    numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :date, presence: true
   validates :time, presence: true, numericality: { greater_than: 0 }
   validates :distance, numericality: { greater_than: 0 }
   validates :homologated, inclusion: { in: [ true, false ] }
-  validates :source, presence: true, inclusion: { in: %w[chip gun] }
 
   validate :race_belongs_to_user
 
@@ -28,7 +25,7 @@ class RunMark < ApplicationRecord
   }
 
   def full_name
-    edition.to_s + "ª " + race.name
+    "#{race.name} #{date.year}"
   end
 
   def pace

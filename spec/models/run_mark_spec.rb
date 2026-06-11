@@ -14,23 +14,6 @@ RSpec.describe RunMark, type: :model do
   end
 
   describe "validations" do
-    it "is invalid without an edition" do
-      expect(build(:run_mark, edition: nil)).not_to be_valid
-    end
-
-    it "is invalid when edition is duplicated within the same race" do
-      race = create(:race)
-      create(:run_mark, race: race, edition: 1)
-      expect(build(:run_mark, race: race, edition: 1)).not_to be_valid
-    end
-
-    it "allows the same edition number in different races" do
-      race_a = create(:race, name: "Race A")
-      race_b = create(:race, name: "Race B", user_id: race_a.user_id)
-      create(:run_mark, race: race_a, edition: 1)
-      expect(build(:run_mark, race: race_b, edition: 1)).to be_valid
-    end
-
     it "is invalid without a date" do
       expect(build(:run_mark, date: nil)).not_to be_valid
     end
@@ -46,30 +29,6 @@ RSpec.describe RunMark, type: :model do
 
     it "is invalid with distance <= 0" do
       expect(build(:run_mark, distance: 0)).not_to be_valid
-    end
-
-    it "is invalid without a source" do
-      expect(build(:run_mark, source: "")).not_to be_valid
-    end
-
-    it "is invalid with a non-integer edition" do
-      expect(build(:run_mark, edition: 1.5)).not_to be_valid
-    end
-
-    it "is invalid with edition < 1" do
-      expect(build(:run_mark, edition: 0)).not_to be_valid
-    end
-
-    it "is valid with edition = 1" do
-      expect(build(:run_mark, edition: 1)).to be_valid
-    end
-
-    it "is invalid with an unrecognised source value" do
-      expect(build(:run_mark, source: "manual")).not_to be_valid
-    end
-
-    it "is valid with source 'gun'" do
-      expect(build(:run_mark, source: "gun")).to be_valid
     end
 
     it "is invalid when the race belongs to a different user" do
@@ -124,18 +83,18 @@ RSpec.describe RunMark, type: :model do
     describe ".ordered" do
       it "returns run_marks newest date first" do
         race = create(:race)
-        old = create(:run_mark, race: race, date: 1.year.ago, edition: 1)
-        recent = create(:run_mark, race: race, date: 1.week.ago, edition: 2)
+        old = create(:run_mark, race: race, date: 1.year.ago)
+        recent = create(:run_mark, race: race, date: 1.week.ago)
         expect(RunMark.ordered).to eq([ recent, old ])
       end
     end
   end
 
   describe "#full_name" do
-    it "combines edition and race name" do
+    it "combines race name and year" do
       race = create(:race, name: "Madrid Marathon")
-      run_mark = create(:run_mark, race: race, edition: 3)
-      expect(run_mark.full_name).to eq("3ª Madrid Marathon")
+      run_mark = create(:run_mark, race: race, date: Date.new(2024, 4, 21))
+      expect(run_mark.full_name).to eq("Madrid Marathon 2024")
     end
   end
 

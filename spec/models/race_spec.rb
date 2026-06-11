@@ -57,8 +57,8 @@ RSpec.describe Race, type: :model do
   describe "#best_run_mark" do
     it "returns the run_mark with the lowest time" do
       race = create(:race)
-      slow = create(:run_mark, race: race, time: 4000, edition: 1)
-      fast = create(:run_mark, race: race, time: 3600, edition: 2)
+      slow = create(:run_mark, race: race, time: 4000, date: 2.years.ago)
+      fast = create(:run_mark, race: race, time: 3600, date: 1.year.ago)
       expect(race.best_run_mark).to eq(fast)
     end
 

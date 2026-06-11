@@ -71,6 +71,6 @@ class RunMarksController < ApplicationController
         seconds: params[:run_mark].delete(:time_seconds)
       )
 
-      params.expect(run_mark: [ :race_id, :edition, :date, :distance, :homologated, :time, :source ])
+      params.expect(run_mark: [ :race_id, :date, :distance, :homologated, :time ])
     end
 end

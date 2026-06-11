@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_163704) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_11_072301) do
   create_table "races", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.float "distance", default: 0.0, null: false
@@ -28,14 +28,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_163704) do
     t.datetime "created_at", null: false
     t.date "date", null: false
     t.float "distance", default: 0.0, null: false
-    t.integer "edition"
     t.boolean "homologated", default: false, null: false
     t.integer "race_id", null: false
-    t.string "source", default: "chip", null: false
     t.integer "time", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.index ["race_id", "edition"], name: "index_run_marks_on_race_id_and_edition", unique: true
     t.index ["race_id"], name: "index_run_marks_on_race_id"
     t.index ["user_id"], name: "index_run_marks_on_user_id"
   end

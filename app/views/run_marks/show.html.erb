@@ -4,7 +4,6 @@
 
 <div class="run-mark-hero">
   <div class="run-mark-hero-header">
-    <span class="run-mark-edition"><%= @run_mark.edition %>ª Edition</span>
     <h1 class="run-mark-race-name"><%= @run_mark.race.name %></h1>
     <span class="run-mark-date"><%= @run_mark.date.strftime("%B %d, %Y") %></span>
   </div>
@@ -12,7 +11,6 @@
   <div class="run-mark-time-display">
     <span class="run-mark-time-label">Finish Time</span>
     <span class="run-mark-time"><%= decorated_time_for(@run_mark.time) %></span>
-    <span class="run-mark-source">via <%= @run_mark.source %></span>
   </div>
 </div>
 
