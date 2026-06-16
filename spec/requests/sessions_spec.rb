@@ -14,7 +14,7 @@ RSpec.describe "Sessions", type: :request do
     context "with valid credentials" do
       it "redirects after login" do
         post session_path, params: { email_address: user.email_address, password: "password" }
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(stats_path)
       end
 
       it "creates a session record" do
