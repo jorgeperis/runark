@@ -9,25 +9,30 @@
   <%= link_to "New run", new_run_path, class: "btn btn--primary" %>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Distance</th>
-      <th>Time</th>
-      <th>Pace</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @runs.each do |run| %>
-      <tr>
-        <th><%= link_to run.full_name, run %></th>
-        <td data-label="Date"><%= run.date %></td>
-        <td data-label="Distance"><%= decorated_distance_for(run.distance) %></td>
-        <td data-label="Time"><%= decorated_time_for(run.time) %></td>
-        <td data-label="Pace"><%= decorated_time_for(run.pace) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= form_with url: runs_path, method: :get, data: { turbo_frame: "runs", turbo_action: "advance", controller: "auto-submit" } do %>
+  <div class="runs-filters flex flex-wrap gap-half mbe-4">
+    <%= text_field_tag :q, params[:q], placeholder: "Search by name…", class: "input", style: "--input-inline-size: 16rem; max-inline-size: 100%;", data: { action: "input->auto-submit#submit" } %>
+
+    <%= select_tag :year,
+          options_for_select(@years, params[:year]),
+          include_blank: "All years",
+          data: { controller: "combobox", action: "change->auto-submit#submit" } %>
+
+    <%= select_tag :distance,
+          options_for_select(@distances.map { |d| [ decorated_distance_for(d), d ] }, params[:distance]),
+          include_blank: "All distances",
+          data: { controller: "combobox", action: "change->auto-submit#submit" } %>
+
+    <%= select_tag :race_id,
+          options_for_select(@races.map { |race| [ race.name, race.id ] }, params[:race_id]),
+          include_blank: "All races",
+          data: { controller: "combobox", action: "change->auto-submit#submit" } %>
+
+    <%= hidden_field_tag :sort, @sort %>
+    <%= hidden_field_tag :direction, @direction %>
+  </div>
+<% end %>
+
+<%= turbo_frame_tag "runs" do %>
+  <%= render "runs_table" %>
+<% end %>

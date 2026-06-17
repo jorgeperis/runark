@@ -14,6 +14,45 @@ RSpec.describe "Runs", type: :request do
         expect(response.body).to include(my_run.full_name)
         expect(response.body).not_to include(other_run.full_name)
       end
+
+      it "filters by search query on the race name" do
+        madrid = create(:run, race: create(:race, user: user, name: "Madrid Marathon"))
+        valencia = create(:run, race: create(:race, user: user, name: "Valencia 10K"))
+        get runs_path, params: { q: "madrid" }
+        expect(response.body).to include(madrid.full_name)
+        expect(response.body).not_to include(valencia.full_name)
+      end
+
+      it "filters by year" do
+        in_2024 = create(:run, race: create(:race, user: user), date: Date.new(2024, 5, 1))
+        in_2025 = create(:run, race: create(:race, user: user), date: Date.new(2025, 5, 1))
+        get runs_path, params: { year: "2024" }
+        expect(response.body).to include(in_2024.full_name)
+        expect(response.body).not_to include(in_2025.full_name)
+      end
+
+      it "filters by distance" do
+        ten = create(:run, race: create(:race, user: user), distance: 10.0)
+        half = create(:run, race: create(:race, user: user), distance: 21.097)
+        get runs_path, params: { distance: 10.0 }
+        expect(response.body).to include(ten.full_name)
+        expect(response.body).not_to include(half.full_name)
+      end
+
+      it "filters by race" do
+        race = create(:race, user: user)
+        on_race = create(:run, race: race)
+        other = create(:run, race: create(:race, user: user))
+        get runs_path, params: { race_id: race.id }
+        expect(response.body).to include(on_race.full_name)
+        expect(response.body).not_to include(other.full_name)
+      end
+
+      it "does not error on an unrecognised sort param" do
+        create(:run, race: create(:race, user: user))
+        get runs_path, params: { sort: "time; DROP TABLE runs" }
+        expect(response).to have_http_status(:ok)
+      end
     end
 
     context "when not authenticated" do

@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th><%= sort_link "date", "Date" %></th>
+      <th><%= sort_link "distance", "Distance" %></th>
+      <th>Time</th>
+      <th><%= sort_link "pace", "Pace" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @runs.each do |run| %>
+      <tr>
+        <th><%= link_to run.full_name, run %></th>
+        <td data-label="Date"><%= run.date %></td>
+        <td data-label="Distance"><%= decorated_distance_for(run.distance) %></td>
+        <td data-label="Time"><%= decorated_time_for(run.time) %></td>
+        <td data-label="Pace"><%= decorated_time_for(run.pace) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

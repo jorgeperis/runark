@@ -2,6 +2,45 @@
  * This is a manifest file that'll be compiled into application.css.
  */
 
+/* Runs filter row — keep comboboxes a stable width so they don't shrink on select */
+.runs-filters .ts-wrapper {
+  min-inline-size: 10rem;
+}
+
+.runs-filters .ts-control {
+  inline-size: 100%;
+}
+
+/* Sortable table headers */
+.sort-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-1);
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sort-link:hover {
+  color: var(--color-accent);
+}
+
+.sort-link__icon {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+  opacity: .5;
+}
+
+.sort-link.active {
+  color: var(--color-accent);
+  font-weight: var(--font-semibold);
+}
+
+.sort-link.active .sort-link__icon {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
 /* Header branding with logo */
 .header-logo {
   display: flex;

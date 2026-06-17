@@ -3,7 +3,20 @@ class RunsController < ApplicationController
 
   # GET /runs or /runs.json
   def index
-    @runs = current_user.runs.ordered
+    @sort      = params[:sort].presence_in(Run::SORTABLE_COLUMNS.keys) || "date"
+    @direction = params[:direction] == "asc" ? "asc" : "desc"
+
+    @runs = current_user.runs
+      .search_name(params[:q])
+      .for_year(params[:year])
+      .for_distance(params[:distance])
+      .for_race(params[:race_id])
+      .sorted_by(@sort, @direction)
+      .includes(:race)
+
+    @years     = current_user.runs.distinct.pluck(Arel.sql("strftime('%Y', date)")).compact.sort.reverse
+    @distances = current_user.runs.distinct.order(:distance).pluck(:distance)
+    @races     = current_user.races.order(:name)
   end
 
   # GET /runs/1 or /runs/1.json

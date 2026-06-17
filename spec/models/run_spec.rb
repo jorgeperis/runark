@@ -88,6 +88,92 @@ RSpec.describe Run, type: :model do
         expect(Run.ordered).to eq([ recent, old ])
       end
     end
+
+    describe ".search_name" do
+      it "matches runs whose race name contains the query" do
+        madrid = create(:run, race: create(:race, name: "Madrid Marathon"))
+        valencia = create(:run, race: create(:race, name: "Valencia 10K"))
+        expect(Run.search_name("madrid")).to eq([ madrid ])
+        expect(Run.search_name("madrid")).not_to include(valencia)
+      end
+
+      it "escapes LIKE wildcards in the query" do
+        plain = create(:run, race: create(:race, name: "City Run"))
+        expect(Run.search_name("%")).not_to include(plain)
+      end
+
+      it "returns all runs when the query is blank" do
+        run = create(:run)
+        expect(Run.search_name(nil)).to eq([ run ])
+        expect(Run.search_name("")).to eq([ run ])
+      end
+    end
+
+    describe ".for_year" do
+      it "filters runs by the year of their date" do
+        in_2024 = create(:run, date: Date.new(2024, 5, 1))
+        in_2025 = create(:run, date: Date.new(2025, 5, 1))
+        expect(Run.for_year("2024")).to eq([ in_2024 ])
+        expect(Run.for_year("2024")).not_to include(in_2025)
+      end
+
+      it "returns all runs when the year is blank" do
+        run = create(:run)
+        expect(Run.for_year(nil)).to eq([ run ])
+      end
+    end
+
+    describe ".for_distance" do
+      it "filters runs by exact distance" do
+        ten = create(:run, distance: 10.0)
+        half = create(:run, distance: 21.097)
+        expect(Run.for_distance(10.0)).to eq([ ten ])
+        expect(Run.for_distance(10.0)).not_to include(half)
+      end
+
+      it "returns all runs when the distance is blank" do
+        run = create(:run)
+        expect(Run.for_distance(nil)).to eq([ run ])
+      end
+    end
+
+    describe ".for_race" do
+      it "filters runs by race id" do
+        race = create(:race)
+        mine = create(:run, race: race)
+        other = create(:run, race: create(:race, user: race.user))
+        expect(Run.for_race(race.id)).to eq([ mine ])
+        expect(Run.for_race(race.id)).not_to include(other)
+      end
+
+      it "returns all runs when the race is blank" do
+        run = create(:run)
+        expect(Run.for_race(nil)).to eq([ run ])
+      end
+    end
+
+    describe ".sorted_by" do
+      it "sorts by distance ascending" do
+        race = create(:race)
+        long = create(:run, race: race, distance: 42.195)
+        short = create(:run, race: race, distance: 5.0)
+        expect(Run.sorted_by("distance", "asc")).to eq([ short, long ])
+      end
+
+      it "sorts by pace using the derived expression" do
+        race = create(:race)
+        fast = create(:run, race: race, distance: 10.0, time: 3000) # 300 s/km
+        slow = create(:run, race: race, distance: 10.0, time: 4000) # 400 s/km
+        expect(Run.sorted_by("pace", "asc")).to eq([ fast, slow ])
+      end
+
+      it "falls back to date for an unrecognised column" do
+        race = create(:race)
+        old = create(:run, race: race, date: 1.year.ago)
+        recent = create(:run, race: race, date: 1.week.ago)
+        expect(Run.sorted_by("time; DROP TABLE runs", "desc")).to eq([ recent, old ])
+      end
+    end
   end
 
   describe "#full_name" do

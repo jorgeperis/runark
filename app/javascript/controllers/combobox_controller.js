@@ -32,7 +32,7 @@ export default class extends Controller {
   }
 
   get #selectSettings() {
-    return { render: this.#render, load: this.#loadSetting }
+    return { render: this.#render, load: this.#loadSetting, allowEmptyOption: true }
   }
 
   get #render() {
