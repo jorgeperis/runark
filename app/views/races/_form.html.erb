@@ -34,6 +34,11 @@
     <%= tag.datalist options_for_select(COMMON_RACE_DISTANCES.map { [_2[:name], _1]}), id: "common_distances" %>
   </div>
 
+  <div class="flex flex-col gap-half mbe-4">
+    <%= form.label :certificate_number, class: "text-sm font-medium leading-none" %>
+    <%= form.text_field :certificate_number, class: "input", placeholder: "e.g. RFEA-2024-1234" %>
+  </div>
+
   <div class="inline-flex items-center mbs-2 mie-1">
     <%= form.submit class: "btn btn--primary" %>
   </div>

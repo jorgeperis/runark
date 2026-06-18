@@ -1,7 +1,8 @@
 class RacesController < ApplicationController
-  before_action :set_race, only: %i[ show edit update destroy ]
+  before_action :set_race, only: %i[ show edit update destroy merge ]
   before_action :require_editable_race, only: %i[ edit update ]
   before_action :require_destroyable_race, only: %i[ destroy ]
+  before_action :require_admin, only: %i[ merge ]
 
   def index
     @races = Race.canonical.order(:name)
@@ -58,6 +59,27 @@ class RacesController < ApplicationController
     render json: races.map { |r| { value: r.id, text: "#{r.name} — #{r.location} (#{r.distance} km)" } }
   end
 
+  def merge
+    target = Race.find(params[:target_id])
+    target = target.canonical_race
+
+    if target == @race
+      return redirect_to @race, alert: "Cannot merge a race into itself."
+    end
+
+    if target.distance != @race.distance
+      return redirect_to @race, alert: "Cannot merge races with different distances."
+    end
+
+    Race.transaction do
+      @race.runs.update_all(race_id: target.id)
+      @race.update!(merged_into: target, runs_count: 0)
+      Race.reset_counters(target.id, :runs)
+    end
+
+    redirect_to target, notice: "\"#{@race.name}\" was merged into \"#{target.name}\"."
+  end
+
   private
 
   def set_race
@@ -76,6 +98,10 @@ class RacesController < ApplicationController
     redirect_to @race, alert: "This race can't be deleted because it has run results attached."
   end
 
+  def require_admin
+    redirect_to root_path, alert: "Not authorized." unless current_user.admin?
+  end
+
   def find_duplicate_race(race)
     Race.canonical
         .where(normalized_name: race.normalized_name, distance: race.distance)
@@ -84,6 +110,6 @@ class RacesController < ApplicationController
   end
 
   def race_params
-    params.expect(race: [ :name, :location, :distance ])
+    params.expect(race: [ :name, :location, :distance, :certificate_number ])
   end
 end

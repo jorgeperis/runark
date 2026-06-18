@@ -6,11 +6,27 @@
 
 <%= render @race %>
 
+<% if @race.certificate_number.present? %>
+  <p class="text-sm mbs-2">Certificate: <span class="font-medium"><%= @race.certificate_number %></span></p>
+<% end %>
+
 <div class="flex flex-wrap items-center gap" style="--row-gap: .5rem">
   <%= link_to "Edit this race", edit_race_path(@race), class: "btn" %>
   <%= link_to "Back to races", races_path, class: "btn" %>
   <%= button_to "Destroy this race", @race, method: :delete, class: "btn" %>
 </div>
+
+<% if current_user.admin? %>
+  <div class="mbs-4 flex items-center gap">
+    <%= form_with url: merge_race_path(@race), method: :post, data: { turbo_confirm: "Merge \"#{@race.name}\" into the selected race? This cannot be undone." } do |f| %>
+      <% other_races = Race.canonical.where.not(id: @race.id).where(distance: @race.distance).order(:name) %>
+      <%= f.select :target_id, options_from_collection_for_select(other_races, :id, :name),
+          { include_blank: "Select race to merge into…" },
+          class: "input" %>
+      <%= f.submit "Merge →", class: "btn btn--primary" %>
+    <% end %>
+  </div>
+<% end %>
 
 <p class="font-bold text-2xl mbs-6">Runs</h1>
 

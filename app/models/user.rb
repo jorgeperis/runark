@@ -2,6 +2,10 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :runs, dependent: :destroy
+
+  def admin?
+    admin
+  end
   has_many :goals, dependent: :destroy
 
   GENDERS = %w[female male].freeze
