@@ -21,9 +21,16 @@
     <%= form.date_field :date, class: "input input--datepicker", data: { controller: "datepicker" } %>
   </div>
 
-  <div class="flex flex-col gap-half mbe-4">
+  <div class="flex flex-col gap-half mbe-4" data-controller="distance-picker">
     <%= form.label :distance, class: "text-sm font-medium leading-none" %>
-    <%= form.number_field :distance, class: "input", step: "0.001", inputmode: :decimal %>
+    <select class="input" data-distance-picker-target="select" data-action="distance-picker#select">
+      <option value="">Selecciona distancia…</option>
+      <% COMMON_RACE_DISTANCES.each do |km, data| %>
+        <option value="<%= km %>"><%= data[:name] %></option>
+      <% end %>
+      <option value="other">Otra…</option>
+    </select>
+    <%= form.number_field :distance, class: "input", step: "0.001", inputmode: :decimal, placeholder: "km", data: { distance_picker_target: "manualField" } %>
   </div>
 
   <div class="flex flex-col gap-half mbe-4">

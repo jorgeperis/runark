@@ -11,7 +11,7 @@
   <tbody>
     <% @runs.each do |run| %>
       <tr>
-        <th><%= link_to run.full_name, run %></th>
+        <th><%= link_to run.full_name, run, data: { turbo_frame: "_top" } %></th>
         <td data-label="Date"><%= run.date %></td>
         <td data-label="Distance"><%= decorated_distance_for(run.distance) %></td>
         <td data-label="Time"><%= decorated_time_for(run.time) %></td>
