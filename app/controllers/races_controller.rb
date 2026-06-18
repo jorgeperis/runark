@@ -5,7 +5,11 @@ class RacesController < ApplicationController
   before_action :require_admin, only: %i[ merge ]
 
   def index
-    @races = Race.canonical.order(:name)
+    @races = Race.canonical
+                 .joins(:runs)
+                 .where(runs: { user_id: current_user.id })
+                 .distinct
+                 .order(:name)
   end
 
   def show

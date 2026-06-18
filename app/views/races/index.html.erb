@@ -20,10 +20,11 @@
       </div>
       <h3 class="race-card-name"><%= race.name %></h3>
       <p class="race-card-location"><%= race.location %></p>
-      <% if race.best_run %>
+      <% best = race.runs.where(user: current_user).order(time: :asc).first %>
+      <% if best %>
         <div class="race-card-best">
           <span class="race-card-best-label">Best</span>
-          <span class="race-card-best-time"><%= decorated_time_for(race.best_run.time) %></span>
+          <span class="race-card-best-time"><%= decorated_time_for(best.time) %></span>
         </div>
       <% end %>
     <% end %>

@@ -6,17 +6,19 @@ RSpec.describe "Races", type: :request do
       let(:user) { create(:user) }
       before { sign_in(user) }
 
-      it "shows all canonical races" do
-        create(:race, name: "Madrid Marathon")
+      it "shows only races where the user has runs" do
+        my_race = create(:race, name: "Madrid Marathon")
+        create(:run, race: my_race, user: user)
         create(:race, name: "Valencia 10K")
         get races_path
         expect(response.body).to include("Madrid Marathon")
-        expect(response.body).to include("Valencia 10K")
+        expect(response.body).not_to include("Valencia 10K")
       end
 
       it "does not show alias races" do
         canonical = create(:race, name: "City Run")
-        create(:race, name: "Ciudad Run", merged_into: canonical)
+        alias_race = create(:race, name: "Ciudad Run", merged_into: canonical)
+        create(:run, race: canonical, user: user)
         get races_path
         expect(response.body).not_to include("Ciudad Run")
       end
