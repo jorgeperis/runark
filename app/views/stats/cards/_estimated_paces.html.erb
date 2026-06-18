@@ -1,5 +1,5 @@
-<% if @last_homologated %>
-<% run = @last_homologated %>
+<% if @last_run %>
+<% run = @last_run %>
 <%= render layout: "stats/card", locals: { title: "Estimated paces", subtitle: "Based on #{run.full_name} running #{decorated_distance_for(run.distance)} at #{decorated_time_for(run.pace)}" } do %>
   <% EstimatedPaces.for(run).each do |distance, time| %>
       <div class="pb-card-mark flex items-center justify-between border rounded-md pi-3 pb-1 bg-shade shadow-xs">

@@ -32,12 +32,6 @@ RSpec.describe Race, type: :model do
       expect(build(:race, distance: -1)).not_to be_valid
     end
 
-    it "is invalid with an unrecognised homologated value" do
-      race = build(:race)
-      race.homologated = nil
-      expect(race).not_to be_valid
-    end
-
     it "is invalid when name + distance + location is duplicated for the same user" do
       user = create(:user)
       create(:race, user_id: user.id, name: "City Run", distance: 10.0, location: "Madrid")

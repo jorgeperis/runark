@@ -96,7 +96,7 @@ RSpec.describe "Runs", type: :request do
       post runs_path, params: {
         run: {
           race_id: race.id, date: Date.current,
-          distance: 10.0, homologated: true,
+          distance: 10.0,
           time_formatted: "1:00:00"
         }
       }
@@ -107,7 +107,7 @@ RSpec.describe "Runs", type: :request do
       post runs_path, params: {
         run: {
           race_id: race.id, date: Date.current,
-          distance: 10.0, homologated: true,
+          distance: 10.0,
           time_formatted: "45:30"
         }
       }

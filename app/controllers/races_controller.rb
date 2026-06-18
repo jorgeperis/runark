@@ -65,6 +65,6 @@ class RacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def race_params
-      params.expect(race: [ :name, :location, :distance, :homologated ])
+      params.expect(race: [ :name, :location, :distance ])
     end
 end

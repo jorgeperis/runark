@@ -3,7 +3,6 @@ FactoryBot.define do
     sequence(:name) { |n| "Race #{n}" }
     location { "Madrid" }
     distance { 10.0 }
-    homologated { true }
     association :user
   end
 end

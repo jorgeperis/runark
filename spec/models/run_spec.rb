@@ -44,26 +44,15 @@ RSpec.describe Run, type: :model do
       race = create(:race, user: user)
       expect(build(:run, race: race, user: user)).to be_valid
     end
-
-    it "is invalid with an unrecognised homologated value" do
-      run = create(:run)
-      run.homologated = nil
-      expect(run).not_to be_valid
-    end
   end
 
   describe "callbacks" do
     describe "#set_defaults_from_race" do
-      let(:race) { create(:race, distance: 21.097, homologated: true) }
+      let(:race) { create(:race, distance: 21.097) }
 
       it "inherits distance from the race when not provided" do
         run = create(:run, race: race, distance: nil)
         expect(run.distance).to eq(21.097)
-      end
-
-      it "inherits homologated from the race when not provided" do
-        run = create(:run, race: race, homologated: nil)
-        expect(run.homologated).to eq(true)
       end
 
       it "does not overwrite an explicitly provided distance" do

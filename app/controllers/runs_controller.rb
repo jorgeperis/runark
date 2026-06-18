@@ -76,6 +76,6 @@ class RunsController < ApplicationController
     end
 
     def run_params
-      params.expect(run: [ :race_id, :date, :distance, :homologated, :time_formatted ])
+      params.expect(run: [ :race_id, :date, :distance, :time_formatted ])
     end
 end

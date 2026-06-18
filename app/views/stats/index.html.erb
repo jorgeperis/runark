@@ -13,7 +13,6 @@
       </svg>
       Personal Bests
     </h2>
-    <span class="stats-section-badge">Homologated races</span>
   </div>
 
   <div class="pb-grid">
@@ -43,8 +42,8 @@
       Estimated Paces
     </h2>
   </div>
-  <% if @last_homologated %>
-  <% run = @last_homologated %>
+  <% if @last_run %>
+  <% run = @last_run %>
   <p class="stats-section-description">Based on <%= run.full_name %></p>
   <div class="estimated-paces-list">
     <% EstimatedPaces.for(run).each do |distance, time| %>

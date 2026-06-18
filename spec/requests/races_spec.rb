@@ -65,7 +65,7 @@ RSpec.describe "Races", type: :request do
     before { sign_in(user) }
 
     it "assigns the new race to the current user" do
-      post races_path, params: { race: { name: "New Race", location: "Madrid", distance: 10.0, homologated: true } }
+      post races_path, params: { race: { name: "New Race", location: "Madrid", distance: 10.0 } }
       expect(Race.last.user).to eq(user)
     end
   end

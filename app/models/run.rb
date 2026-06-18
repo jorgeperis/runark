@@ -5,7 +5,6 @@ class Run < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true, numericality: { greater_than: 0 }
   validates :distance, numericality: { greater_than: 0 }
-  validates :homologated, inclusion: { in: [ true, false ] }
 
   validate :race_belongs_to_user
 
@@ -18,7 +17,6 @@ class Run < ApplicationRecord
   }.freeze
 
   scope :ordered, -> { order(date: :desc) }
-  scope :homologated, -> { where(homologated: true) }
   scope :common_distances, -> { where(distance: COMMON_RACE_DISTANCES.keys) }
   scope :favourite_distances, -> { where(distance: FAVOURITE_RACE_DISTANCES.keys) }
 
@@ -39,8 +37,8 @@ class Run < ApplicationRecord
     order(:distance, :time).where("time = (SELECT MIN(time) FROM runs AS rm WHERE rm.distance = runs.distance)")
   }
 
-  scope :best_homologated_common_distances, -> {
-    common_distances.homologated.with_min_time_per_distance
+  scope :best_common_distances, -> {
+    common_distances.with_min_time_per_distance
   }
 
   def full_name
@@ -76,6 +74,5 @@ class Run < ApplicationRecord
 
   def set_defaults_from_race
     self.distance ||= race.distance
-    self.homologated ||= race.homologated
   end
 end

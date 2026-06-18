@@ -1,4 +1,4 @@
-<%= render layout: "stats/card", locals: { title: "Personal bests", subtitle: "Best paces on homologated races" } do %>
+<%= render layout: "stats/card", locals: { title: "Personal bests", subtitle: "Best paces by distance" } do %>
     <% @best_marks.each do |run| %>
         <%= link_to run do %>
           <div class="pb-card-mark flex items-center justify-between border rounded-md pi-3 pb-1 bg-shade shadow-xs">

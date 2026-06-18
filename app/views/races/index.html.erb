@@ -17,9 +17,6 @@
     <%= link_to race, class: "race-card", style: "--race-color: #{race_color}; --race-color-light: #{race_color_light}" do %>
       <div class="race-card-header">
         <span class="race-card-distance"><%= distance_data ? distance_data[:name] : decorated_distance_for(race.distance) %></span>
-        <% if race.homologated? %>
-          <span class="race-card-badge">Homologated</span>
-        <% end %>
       </div>
       <h3 class="race-card-name"><%= race.name %></h3>
       <p class="race-card-location"><%= race.location %></p>
