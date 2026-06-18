@@ -39,6 +39,17 @@ RSpec.describe "Stats", type: :request do
         expect(response.body).to include(edit_profile_path)
       end
 
+      it "shows an age-graded percentage once the profile is complete" do
+        AgeGrading.reload!
+        user.update!(gender: "male", birthdate: Date.new(1986, 1, 1))
+        race = create(:race, user: user, distance: 10.0)
+        create(:run, user: user, race: race, distance: 10.0, time: 1601, date: Date.new(2021, 6, 1))
+
+        get stats_path
+
+        expect(response.body).to include("100.0%")
+      end
+
       it "shows goals with progress" do
         create(:goal, user: user, distance: 10.0, target_time: 2400)
         get stats_path
