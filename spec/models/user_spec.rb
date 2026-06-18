@@ -8,16 +8,10 @@ RSpec.describe User, type: :model do
       expect { user.destroy }.to change(Session, :count).by(-1)
     end
 
-    it "has many races and destroys them on delete" do
-      user = create(:user)
-      create(:race, user_id: user.id)
-      expect { user.destroy }.to change(Race, :count).by(-1)
-    end
-
     it "has many runs and destroys them on delete" do
       user = create(:user)
-      race = create(:race, user_id: user.id)
-      create(:run, race: race)
+      race = create(:race)
+      create(:run, race: race, user: user)
       expect { user.destroy }.to change(Run, :count).by(-1)
     end
   end

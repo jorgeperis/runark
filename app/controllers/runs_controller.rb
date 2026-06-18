@@ -16,7 +16,7 @@ class RunsController < ApplicationController
 
     @years     = current_user.runs.distinct.pluck(Arel.sql("strftime('%Y', date)")).compact.sort.reverse
     @distances = current_user.runs.distinct.order(:distance).pluck(:distance)
-    @races     = current_user.races.order(:name)
+    @races     = Race.canonical.order(:name)
   end
 
   # GET /runs/1 or /runs/1.json

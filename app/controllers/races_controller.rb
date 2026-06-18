@@ -1,27 +1,24 @@
 class RacesController < ApplicationController
   before_action :set_race, only: %i[ show edit update destroy ]
+  before_action :require_editable_race, only: %i[ edit update ]
+  before_action :require_destroyable_race, only: %i[ destroy ]
 
-  # GET /races or /races.json
   def index
-    @races = current_user.races
+    @races = Race.canonical.order(:name)
   end
 
-  # GET /races/1 or /races/1.json
   def show
   end
 
-  # GET /races/new
   def new
     @race = Race.new
   end
 
-  # GET /races/1/edit
   def edit
   end
 
-  # POST /races or /races.json
   def create
-    @race = current_user.races.new(race_params)
+    @race = Race.new(race_params)
 
     respond_to do |format|
       if @race.save
@@ -34,7 +31,6 @@ class RacesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /races/1 or /races/1.json
   def update
     respond_to do |format|
       if @race.update(race_params)
@@ -47,7 +43,6 @@ class RacesController < ApplicationController
     end
   end
 
-  # DELETE /races/1 or /races/1.json
   def destroy
     @race.destroy!
 
@@ -57,14 +52,30 @@ class RacesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_race
-      @race = current_user.races.find(params.expect(:id))
-    end
+  def search
+    races = Race.search(params[:q].to_s)
+    render json: races.map { |r| { value: r.id, text: "#{r.name} — #{r.location} (#{r.distance} km)" } }
+  end
 
-    # Only allow a list of trusted parameters through.
-    def race_params
-      params.expect(race: [ :name, :location, :distance ])
-    end
+  private
+
+  def set_race
+    @race = Race.find(params.expect(:id))
+  end
+
+  def require_editable_race
+    return if @race.runs.where.not(user_id: current_user.id).none?
+
+    redirect_to @race, alert: "This race can't be edited because other runners have results on it."
+  end
+
+  def require_destroyable_race
+    return if @race.runs.none?
+
+    redirect_to @race, alert: "This race can't be deleted because it has run results attached."
+  end
+
+  def race_params
+    params.expect(race: [ :name, :location, :distance ])
+  end
 end

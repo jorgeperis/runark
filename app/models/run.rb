@@ -6,8 +6,7 @@ class Run < ApplicationRecord
   validates :time, presence: true, numericality: { greater_than: 0 }
   validates :distance, numericality: { greater_than: 0 }
 
-  validate :race_belongs_to_user
-
+  before_validation :resolve_canonical_race, on: :create
   before_validation :set_defaults_from_race, on: :create
 
   SORTABLE_COLUMNS = {
@@ -68,8 +67,8 @@ class Run < ApplicationRecord
 
   private
 
-  def race_belongs_to_user
-    errors.add(:race, :invalid) if race && user_id != race.user_id
+  def resolve_canonical_race
+    self.race = race.canonical_race if race
   end
 
   def set_defaults_from_race

@@ -25,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @race.runs.ordered.each do |run| %>
+    <% @race.runs.where(user: current_user).ordered.each do |run| %>
       <div class="flex flex-col items-start gap">
         <tr>
           <th><%= link_to run.full_name, run %></th>

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe AgeGrading do
   let(:user) { create(:user, gender: "male", birthdate: Date.new(1986, 1, 1)) }
-  let(:race) { create(:race, user: user, distance: 10.0) }
+  let(:race) { create(:race, distance: 10.0) }
   let(:run) { create(:run, user: user, race: race, distance: 10.0, time: 2000, date: Date.new(2021, 6, 1)) }
 
   it "returns nil when no coefficient data is loaded" do
@@ -32,7 +32,7 @@ RSpec.describe AgeGrading do
     it "scores a run at the age standard as ~100%" do
       # Age 35 male 10K standard is 1601s in the 2020 tables.
       runner = create(:user, gender: "male", birthdate: Date.new(1986, 1, 1))
-      race = create(:race, user: runner, distance: 10.0)
+      race = create(:race, distance: 10.0)
       run = create(:run, user: runner, race: race, distance: 10.0, time: 1601, date: Date.new(2021, 6, 1))
 
       expect(described_class.for(run, runner)).to eq(100.0)

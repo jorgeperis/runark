@@ -12,7 +12,7 @@ RSpec.describe "Stats", type: :request do
       end
 
       it "shows lifetime totals and progression across years" do
-        race = create(:race, user: user, distance: 10.0)
+        race = create(:race, distance: 10.0)
         create(:run, user: user, race: race, distance: 10.0, time: 2700, date: Date.new(2024, 5, 1))
         latest = create(:run, user: user, race: race, distance: 10.0, time: 2500, date: Date.new(2026, 5, 1))
 
@@ -42,7 +42,7 @@ RSpec.describe "Stats", type: :request do
       it "shows an age-graded percentage once the profile is complete" do
         AgeGrading.reload!
         user.update!(gender: "male", birthdate: Date.new(1986, 1, 1))
-        race = create(:race, user: user, distance: 10.0)
+        race = create(:race, distance: 10.0)
         create(:run, user: user, race: race, distance: 10.0, time: 1601, date: Date.new(2021, 6, 1))
 
         get stats_path

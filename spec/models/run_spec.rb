@@ -31,17 +31,9 @@ RSpec.describe Run, type: :model do
       expect(build(:run, distance: 0)).not_to be_valid
     end
 
-    it "is invalid when the race belongs to a different user" do
-      user_a = create(:user)
-      user_b = create(:user)
-      race = create(:race, user: user_a)
-      run = build(:run, race: race, user: user_b)
-      expect(run).not_to be_valid
-    end
-
-    it "is valid when the race and run belong to the same user" do
+    it "is valid when the race is a global race" do
+      race = create(:race)
       user = create(:user)
-      race = create(:race, user: user)
       expect(build(:run, race: race, user: user)).to be_valid
     end
   end
@@ -130,7 +122,7 @@ RSpec.describe Run, type: :model do
       it "filters runs by race id" do
         race = create(:race)
         mine = create(:run, race: race)
-        other = create(:run, race: create(:race, user: race.user))
+        other = create(:run, race: create(:race))
         expect(Run.for_race(race.id)).to eq([ mine ])
         expect(Run.for_race(race.id)).not_to include(other)
       end

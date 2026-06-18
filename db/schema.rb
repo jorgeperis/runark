@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_18_120001) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_18_140000) do
   create_table "goals", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.float "distance", null: false
@@ -22,15 +22,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_120001) do
   end
 
   create_table "races", force: :cascade do |t|
+    t.string "certificate_number"
     t.datetime "created_at", null: false
     t.float "distance", default: 0.0, null: false
     t.string "location", null: false
+    t.integer "merged_into_id"
     t.string "name", null: false
+    t.string "normalized_name", null: false
     t.integer "runs_count", default: 0, null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id", "name", "distance", "location"], name: "index_races_on_user_id_name_distance_location", unique: true
-    t.index ["user_id"], name: "index_races_on_user_id"
+    t.index ["merged_into_id"], name: "index_races_on_merged_into_id"
+    t.index ["normalized_name", "distance", "location"], name: "index_races_on_normalized_name_distance_location", unique: true
   end
 
   create_table "run_tags", force: :cascade do |t|
@@ -206,7 +208,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_120001) do
   end
 
   add_foreign_key "goals", "users"
-  add_foreign_key "races", "users"
+  add_foreign_key "races", "races", column: "merged_into_id"
   add_foreign_key "run_tags", "runs"
   add_foreign_key "run_tags", "tags"
   add_foreign_key "runs", "races"

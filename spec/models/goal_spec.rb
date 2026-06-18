@@ -21,7 +21,7 @@ RSpec.describe Goal, type: :model do
     end
 
     it "tracks progress toward the target from the best run" do
-      race = create(:race, user: user, distance: 10.0)
+      race = create(:race, distance: 10.0)
       create(:run, user: user, race: race, distance: 10.0, time: 2500)
 
       expect(goal.achieved?).to be false
@@ -29,7 +29,7 @@ RSpec.describe Goal, type: :model do
     end
 
     it "is achieved when the best run beats the target" do
-      race = create(:race, user: user, distance: 10.0)
+      race = create(:race, distance: 10.0)
       create(:run, user: user, race: race, distance: 10.0, time: 2300)
 
       expect(goal.achieved?).to be true
