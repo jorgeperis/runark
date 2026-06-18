@@ -5,6 +5,25 @@
   <p class="stats-subtitle">Track your running journey</p>
 </div>
 
+<section class="stats-numbers">
+  <div class="stats-number">
+    <span class="stats-number-value"><%= @total_races %></span>
+    <span class="stats-number-label">Races</span>
+  </div>
+  <div class="stats-number">
+    <span class="stats-number-value"><%= number_with_delimiter(@total_distance.round) %><span class="stats-number-unit">km</span></span>
+    <span class="stats-number-label">Distance raced</span>
+  </div>
+  <div class="stats-number">
+    <span class="stats-number-value"><%= (@total_time / 3600.0).round(1) %><span class="stats-number-unit">h</span></span>
+    <span class="stats-number-label">Time racing</span>
+  </div>
+  <div class="stats-number">
+    <span class="stats-number-value"><%= @races_this_year %></span>
+    <span class="stats-number-label">In <%= Date.current.year %></span>
+  </div>
+</section>
+
 <section class="stats-section stats-section--highlight">
   <div class="stats-section-header">
     <h2 class="stats-section-title">
@@ -31,6 +50,58 @@
       <% end %>
     <% end %>
   </div>
+</section>
+
+<section class="stats-section">
+  <div class="stats-section-header">
+    <h2 class="stats-section-title">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="stats-section-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+      </svg>
+      Progression
+    </h2>
+    <span class="stats-section-badge">Best time per year</span>
+  </div>
+
+  <% progressions = @progression.select { |_, entries| entries.size >= 2 } %>
+  <% if progressions.any? %>
+    <div class="progression-list">
+      <% progressions.each do |distance, entries| %>
+        <% distance_data = COMMON_RACE_DISTANCES[distance] %>
+        <% runs = entries.map(&:last) %>
+        <% chart = progression_chart(entries.map { |year, run| [ year, run.time ] }, width: 280, height: 64) %>
+        <% delta = runs.last.time - runs.first.time %>
+        <div class="progression-row" style="--pr-color: <%= distance_data[:colors][:dark] %>; --pr-color-light: <%= distance_data[:colors][:light] %>">
+          <div class="progression-meta">
+            <span class="progression-distance"><%= distance_data[:name] %></span>
+            <span class="progression-delta <%= delta <= 0 ? "is-faster" : "is-slower" %>">
+              <%= delta <= 0 ? "−" : "+" %><%= decorated_time_for(delta.abs) %>
+            </span>
+          </div>
+          <svg class="progression-chart" viewBox="0 0 280 64" role="img"
+               aria-label="<%= distance_data[:name] %> best times from <%= entries.first.first %> to <%= entries.last.first %>">
+            <polyline points="<%= chart[:line] %>" fill="none" stroke="var(--pr-color)" stroke-width="2"
+                      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+            <% chart[:points].each_with_index do |p, i| %>
+              <% run = runs[i] %>
+              <a href="<%= run_path(run) %>" class="progression-point">
+                <title><%= run.full_name %> · <%= decorated_time_for(run.time) %></title>
+                <circle cx="<%= p[:x] %>" cy="<%= p[:y] %>" r="11" fill="transparent" />
+                <circle class="progression-dot" cx="<%= p[:x] %>" cy="<%= p[:y] %>" r="3.5"
+                        fill="var(--pr-color)" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke" />
+              </a>
+            <% end %>
+          </svg>
+          <div class="progression-years">
+            <span><%= entries.first.first %> · <%= decorated_time_for(runs.first.time) %></span>
+            <span><%= entries.last.first %> · <%= decorated_time_for(runs.last.time) %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="stats-section-description">Race a distance in two or more years to see your progression here.</p>
+  <% end %>
 </section>
 
 <section class="stats-section">

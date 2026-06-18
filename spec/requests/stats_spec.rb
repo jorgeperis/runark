@@ -10,6 +10,20 @@ RSpec.describe "Stats", type: :request do
         get stats_path
         expect(response).to have_http_status(:ok)
       end
+
+      it "shows lifetime totals and progression across years" do
+        race = create(:race, user: user, distance: 10.0)
+        create(:run, user: user, race: race, distance: 10.0, time: 2700, date: Date.new(2024, 5, 1))
+        latest = create(:run, user: user, race: race, distance: 10.0, time: 2500, date: Date.new(2026, 5, 1))
+
+        get stats_path
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Races")
+        expect(response.body).to include("Progression")
+        expect(response.body).to include(run_path(latest))
+        expect(response.body).to include(race.name)
+      end
     end
 
     context "when not authenticated" do
