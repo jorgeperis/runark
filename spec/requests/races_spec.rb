@@ -102,6 +102,18 @@ RSpec.describe "Races", type: :request do
       post races_path, params: { race: { name: "New Race", location: "Madrid", distance: 10.0 } }
       expect(Race.last.name).to eq("New Race")
     end
+
+    it "shows a link to the existing race on duplicate name + distance + location" do
+      existing = create(:race, name: "City Run", location: "Madrid", distance: 10.0)
+      post races_path, params: { race: { name: "City Run", location: "Madrid", distance: 10.0 } }
+      expect(response.body).to include(race_path(existing))
+    end
+
+    it "treats accented duplicates as the same race" do
+      existing = create(:race, name: "Marató de Barcelona", location: "Barcelona", distance: 42.195)
+      post races_path, params: { race: { name: "Marato de Barcelona", location: "Barcelona", distance: 42.195 } }
+      expect(response.body).to include(race_path(existing))
+    end
   end
 
   describe "GET /races/search" do

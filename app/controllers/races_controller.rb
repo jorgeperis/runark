@@ -25,6 +25,7 @@ class RacesController < ApplicationController
         format.html { redirect_to @race, notice: "Race was successfully created." }
         format.json { render :show, status: :created, location: @race }
       else
+        @existing_race = find_duplicate_race(@race) if @race.errors[:normalized_name].any?
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @race.errors, status: :unprocessable_entity }
       end
@@ -73,6 +74,13 @@ class RacesController < ApplicationController
     return if @race.runs.none?
 
     redirect_to @race, alert: "This race can't be deleted because it has run results attached."
+  end
+
+  def find_duplicate_race(race)
+    Race.canonical
+        .where(normalized_name: race.normalized_name, distance: race.distance)
+        .where("lower(location) = lower(?)", race.location.to_s)
+        .first
   end
 
   def race_params

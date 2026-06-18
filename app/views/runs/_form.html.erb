@@ -13,7 +13,14 @@
 
   <div class="flex flex-col gap-half mbe-4">
     <%= form.label :race_id, class: "text-sm font-medium leading-none" %>
-    <%= form.select :race_id, grouped_options_for_select(races_grouped_options, form.object.race_id), { include_blank: "Select race..." }, data: { controller: "combobox" } %>
+    <% current_race = run.race %>
+    <% current_options = current_race ? [["#{current_race.name} — #{current_race.location} (#{current_race.distance} km)", current_race.id]] : [] %>
+    <%= form.select :race_id,
+        options_for_select(current_options, run.race_id),
+        { include_blank: "Search for a race…" },
+        data: { controller: "combobox", combobox_url_value: search_races_path,
+                combobox_no_results_value: "No race found" } %>
+    <%= link_to "Create new race →", new_race_path, class: "text-sm" %>
   </div>
 
   <div class="flex flex-col gap-half mbe-4">
