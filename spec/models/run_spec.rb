@@ -196,26 +196,39 @@ RSpec.describe Run, type: :model do
     end
   end
 
-  describe ".time_from_components" do
-    it "converts h/m/s into total seconds" do
-      expect(Run.time_from_components(hours: 1, minutes: 23, seconds: 45)).to eq(5025)
+  describe ".seconds_from_formatted" do
+    it "parses a full h:mm:ss string into total seconds" do
+      expect(Run.seconds_from_formatted("1:23:45")).to eq(5025)
     end
 
-    it "treats nil as zero" do
-      expect(Run.time_from_components(hours: nil, minutes: nil, seconds: nil)).to eq(0)
+    it "fills right-to-left so two groups mean minutes and seconds" do
+      expect(Run.seconds_from_formatted("45:30")).to eq(2730)
     end
 
-    it "accepts string inputs as received from form params" do
-      expect(Run.time_from_components(hours: "1", minutes: "30", seconds: "0")).to eq(5400)
+    it "fills right-to-left so a single group means seconds" do
+      expect(Run.seconds_from_formatted("30")).to eq(30)
+    end
+
+    it "returns nil for blank input" do
+      expect(Run.seconds_from_formatted("")).to be_nil
+      expect(Run.seconds_from_formatted(nil)).to be_nil
     end
   end
 
-  describe "#time_hours / #time_minutes / #time_seconds" do
-    it "correctly decomposes a time into h/m/s components" do
-      run = build(:run, time: 5025) # 1h 23m 45s
-      expect(run.time_hours).to eq(1)
-      expect(run.time_minutes).to eq(23)
-      expect(run.time_seconds).to eq(45)
+  describe "#time_formatted" do
+    it "formats the stored seconds as h:mm:ss with zero-padding" do
+      expect(build(:run, time: 5025).time_formatted).to eq("1:23:45")
+    end
+
+    it "is nil when time is blank" do
+      expect(build(:run, time: nil).time_formatted).to be_nil
+    end
+
+    it "round-trips through the writer" do
+      run = build(:run)
+      run.time_formatted = "1:23:45"
+      expect(run.time).to eq(5025)
+      expect(run.time_formatted).to eq("1:23:45")
     end
   end
 end

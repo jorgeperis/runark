@@ -97,10 +97,21 @@ RSpec.describe "Runs", type: :request do
         run: {
           race_id: race.id, date: Date.current,
           distance: 10.0, homologated: true,
-          time_hours: 1, time_minutes: 0, time_seconds: 0
+          time_formatted: "1:00:00"
         }
       }
       expect(Run.last.user).to eq(user)
+    end
+
+    it "parses the formatted time into seconds" do
+      post runs_path, params: {
+        run: {
+          race_id: race.id, date: Date.current,
+          distance: 10.0, homologated: true,
+          time_formatted: "45:30"
+        }
+      }
+      expect(Run.last.time).to eq(2730)
     end
   end
 end

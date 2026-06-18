@@ -76,14 +76,6 @@ class RunsController < ApplicationController
     end
 
     def run_params
-      if (run = params[:run])
-        run[:time] = Run.time_from_components(
-          hours:   run.delete(:time_hours),
-          minutes: run.delete(:time_minutes),
-          seconds: run.delete(:time_seconds)
-        )
-      end
-
-      params.expect(run: [ :race_id, :date, :distance, :homologated, :time ])
+      params.expect(run: [ :race_id, :date, :distance, :homologated, :time_formatted ])
     end
 end

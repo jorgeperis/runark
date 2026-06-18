@@ -51,20 +51,21 @@ class Run < ApplicationRecord
     (time / distance).round
   end
 
-  def time_hours
-    time / 3600
+  def time_formatted
+    return if time.blank?
+
+    format("%d:%02d:%02d", time / 3600, (time % 3600) / 60, time % 60)
   end
 
-  def time_minutes
-    (time % 3600) / 60
+  def time_formatted=(value)
+    self.time = self.class.seconds_from_formatted(value)
   end
 
-  def time_seconds
-    time % 60
-  end
+  def self.seconds_from_formatted(value)
+    return if value.blank?
 
-  def self.time_from_components(hours:, minutes:, seconds:)
-    hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
+    hours, minutes, seconds = [ 0, 0, 0, *value.to_s.split(":") ].last(3).map(&:to_i)
+    hours * 3600 + minutes * 60 + seconds
   end
 
   private
