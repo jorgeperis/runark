@@ -36,3 +36,22 @@
     <%= form.submit "Save profile", class: "btn btn--primary" %>
   <% end %>
 </div>
+
+<div class="card mbs-4">
+  <h2 class="font-bold text-xl mbe-2">Favourite distances</h2>
+  <p class="text-sm text-subtle mbe-4">Pick the distances shown on your stats page (top marks, progression and estimated paces).</p>
+
+  <%= form_with(model: @user, url: profile_path, method: :patch) do |form| %>
+    <div class="flex flex-col gap-half mbe-4">
+      <% COMMON_RACE_DISTANCES.each do |key, data| %>
+        <label class="flex items-center gap-half text-sm">
+          <%= check_box_tag "user[favourite_distances][]", key, @user.favourite_distance_keys.include?(key), id: "favourite_distance_#{key}" %>
+          <%= data[:name] %>
+        </label>
+      <% end %>
+      <%= hidden_field_tag "user[favourite_distances][]", "" %>
+    </div>
+
+    <%= form.submit "Save favourite distances", class: "btn btn--primary" %>
+  <% end %>
+</div>

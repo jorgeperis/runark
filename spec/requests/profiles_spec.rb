@@ -25,5 +25,20 @@ RSpec.describe "Profiles", type: :request do
       patch profile_path, params: { user: { gender: "invalid" } }
       expect(response).to have_http_status(:unprocessable_entity)
     end
+
+    it "updates favourite distances" do
+      patch profile_path, params: { user: { favourite_distances: [ "5.0", "10.0" ] } }
+
+      expect(user.reload.favourite_distance_keys).to eq([ "5.0", "10.0" ])
+    end
+
+    it "clears favourite distances back to the default when none are selected" do
+      user.update!(favourite_distances: [ "5.0" ])
+
+      patch profile_path, params: { user: { favourite_distances: [ "" ] } }
+
+      expect(user.reload.favourite_distances).to eq([])
+      expect(user.favourite_distance_keys).to eq(COMMON_RACE_DISTANCES.keys)
+    end
   end
 end

@@ -4,9 +4,9 @@ RSpec.describe EstimatedPaces do
   let(:run) { build(:run, time: 3600, distance: 10.0) }
 
   describe ".for" do
-    it "returns a hash keyed by the favourite race distance strings" do
+    it "returns a hash keyed by the common race distance strings by default" do
       result = EstimatedPaces.for(run)
-      expect(result.keys).to match_array(FAVOURITE_RACE_DISTANCES.keys)
+      expect(result.keys).to match_array(COMMON_RACE_DISTANCES.keys)
     end
 
     it "accepts a custom list of distances" do
