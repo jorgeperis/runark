@@ -16,6 +16,6 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.expect(user: [ :gender, :birthdate ])
+    params.expect(user: [ :gender, :birthdate, favourite_distances: [] ])
   end
 end

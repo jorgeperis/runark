@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_18_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_19_120000) do
   create_table "goals", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.float "distance", null: false
@@ -202,6 +202,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_150000) do
     t.date "birthdate"
     t.datetime "created_at", null: false
     t.string "email_address", null: false
+    t.text "favourite_distances"
     t.string "gender"
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false

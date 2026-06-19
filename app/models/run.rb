@@ -17,7 +17,6 @@ class Run < ApplicationRecord
 
   scope :ordered, -> { order(date: :desc) }
   scope :common_distances, -> { where(distance: COMMON_RACE_DISTANCES.keys) }
-  scope :favourite_distances, -> { where(distance: FAVOURITE_RACE_DISTANCES.keys) }
 
   scope :search_name, ->(query) {
     query.present? ? joins(:race).where("races.name LIKE ?", "%#{sanitize_sql_like(query)}%") : all

@@ -210,7 +210,7 @@
   <% run = @last_run %>
   <p class="stats-section-description">Based on <%= run.full_name %></p>
   <div class="estimated-paces-list">
-    <% EstimatedPaces.for(run).each do |distance, time| %>
+    <% EstimatedPaces.for(run, @favourite_distances.keys).each do |distance, time| %>
       <% distance_data = COMMON_RACE_DISTANCES[distance] %>
       <div class="estimated-pace-item" style="--ep-color: <%= distance_data[:colors][:dark] %>">
         <span class="estimated-pace-distance"><%= distance_data[:name] %></span>
@@ -267,10 +267,11 @@
       </svg>
       Top 3 by Distance
     </h2>
+    <%= link_to "Edit distances", edit_profile_path, class: "stats-section-badge" %>
   </div>
 
   <div class="top-three-rows">
-    <% FAVOURITE_RACE_DISTANCES.each do |distance, distance_data| %>
+    <% @favourite_distances.each do |distance, distance_data| %>
       <div class="top-three-row" style="--tt-color: <%= distance_data[:colors][:dark] %>; --tt-color-light: <%= distance_data[:colors][:light] %>">
         <h3 class="top-three-row-title"><%= distance_data[:name] %></h3>
         <div class="top-three-items">

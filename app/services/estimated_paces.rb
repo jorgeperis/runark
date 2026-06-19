@@ -1,5 +1,5 @@
 class EstimatedPaces
-  def self.for(run, distances = FAVOURITE_RACE_DISTANCES.keys)
+  def self.for(run, distances = COMMON_RACE_DISTANCES.keys)
     self.new(run, distances).calculate
   end
 
