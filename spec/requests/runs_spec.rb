@@ -48,6 +48,16 @@ RSpec.describe "Runs", type: :request do
         expect(response.body).not_to include(other.full_name)
       end
 
+      it "highlights only the best run for each distance" do
+        create(:run, race: create(:race), user: user, distance: 10.0, time: 2400)
+        create(:run, race: create(:race), user: user, distance: 10.0, time: 3000)
+        create(:run, race: create(:race), user: user, distance: 21.097, time: 5400)
+
+        get runs_path
+
+        expect(response.body.scan("runs-table__row--pb").size).to eq(2)
+      end
+
       it "does not error on an unrecognised sort param" do
         create(:run, race: create(:race), user: user)
         get runs_path, params: { sort: "time; DROP TABLE runs" }

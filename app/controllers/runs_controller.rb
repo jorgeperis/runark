@@ -14,9 +14,10 @@ class RunsController < ApplicationController
       .sorted_by(@sort, @direction)
       .includes(:race)
 
-    @years     = current_user.runs.distinct.pluck(Arel.sql("strftime('%Y', date)")).compact.sort.reverse
-    @distances = current_user.runs.distinct.order(:distance).pluck(:distance)
-    @races     = Race.canonical.order(:name)
+    @years      = current_user.runs.distinct.pluck(Arel.sql("strftime('%Y', date)")).compact.sort.reverse
+    @distances  = current_user.runs.distinct.order(:distance).pluck(:distance)
+    @races      = Race.canonical.order(:name)
+    @best_times = current_user.runs.group(:distance).minimum(:time)
   end
 
   # GET /runs/1 or /runs/1.json
