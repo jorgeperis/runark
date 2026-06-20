@@ -1,177 +1,186 @@
-<%# Fixed navigation %>
-<nav class="landing-nav">
-  <div class="landing-container landing-nav-inner">
-    <a href="/" class="header-logo">
-      <svg class="header-logo-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#FF6B35"/>
-            <stop offset="100%" style="stop-color:#F7931E"/>
-          </linearGradient>
-        </defs>
-        <circle cx="256" cy="256" r="256" fill="url(#logoGrad)"/>
-        <g fill="white" transform="translate(256, 256)">
-          <polygon points="140,0 -80,-90 -80,-35 -180,0 -80,35 -80,90" />
-          <rect x="-200" y="-8" width="50" height="12" rx="6" opacity="0.7"/>
-          <rect x="-185" y="22" width="35" height="10" rx="5" opacity="0.5"/>
-          <rect x="-190" y="-38" width="40" height="10" rx="5" opacity="0.5"/>
+<%# Runark landing — neo-brutalist. Styles in app/assets/stylesheets/runark_landing.css %>
+
+<%# ---------------------------------------------------------------- Top marquee %>
+<div class="rk-marquee rk-marquee--lime">
+  <div class="rk-marquee-track">
+    <% 2.times do %>
+      <span>RUNARK <b>✦</b> CADA CARRERA <b>✦</b> CADA RÉCORD <b>✦</b> 5K—42K <b>✦</b> PREDICCIÓN RIEGEL <b>✦</b> SIN EXCUSAS <b>✦</b> </span>
+    <% end %>
+  </div>
+</div>
+
+<%# ---------------------------------------------------------------- Nav %>
+<nav class="rk-nav">
+  <div class="rk-container rk-nav-inner">
+    <a href="/" class="rk-logo">
+      <svg class="rk-logo-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="46" height="46" fill="#F43F8E" stroke="#0C0C0E" stroke-width="2"/>
+        <g fill="none" stroke="#0C0C0E" stroke-width="6" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M15 13 V36"/>
+          <path d="M15 13 H30 V24 H15"/>
+          <path d="M22 24 L31 36"/>
         </g>
       </svg>
-      <span class="header-logo-text">Arrow</span>
+      <span class="rk-logo-text">Runark</span>
     </a>
-    <%= link_to "Log in", new_session_path, class: "btn btn--primary" %>
+    <%= link_to "Log in →", new_session_path, class: "rk-btn rk-btn--pink rk-btn--sm" %>
   </div>
 </nav>
 
-<%# Hero section %>
-<section class="landing-hero">
-  <div class="landing-hero-bg">
-    <div class="landing-glow-1"></div>
-    <div class="landing-glow-2"></div>
-  </div>
-  <div class="landing-container">
-    <div class="landing-hero-inner">
-      <%# Left column: text %>
-      <div class="landing-hero-text">
-        <div class="landing-eyebrow">
-          <span class="landing-eyebrow-dot"></span>
-          For competitive runners
-        </div>
-        <h1 class="landing-headline">
-          Track every race.<br>
-          Own every <span class="landing-gradient-text">PR.</span>
-        </h1>
-        <p class="landing-lead">
-          Arrow logs your race times, reveals your personal bests, and predicts your finish time across any distance.
-        </p>
-        <div class="landing-cta-row">
-          <%= link_to new_session_path, class: "btn btn--primary landing-btn-lg" do %>
-            Log in to Arrow &rarr;
-          <% end %>
-        </div>
+<%# ---------------------------------------------------------------- Hero %>
+<section class="rk-hero">
+  <div class="rk-container rk-hero-inner">
+    <div class="rk-hero-text">
+      <span class="rk-eyebrow">Para corredores que compiten</span>
+
+      <h1 class="rk-headline">
+        Cada<br>
+        carrera.<br>
+        Cada <span class="rk-hl-pink">récord</span><span class="rk-hl-stroke">.</span>
+      </h1>
+
+      <p class="rk-lead">
+        Runark registra tus tiempos, destaca tus mejores marcas y predice tu tiempo de meta
+        en cualquier distancia. Sin gráficas bonitas que no dicen nada. Solo tus números.
+      </p>
+
+      <div class="rk-cta-row">
+        <%= link_to "Entrar en Runark →", new_session_path, class: "rk-btn rk-btn--pink" %>
+        <a href="#features" class="rk-btn">Ver qué hace</a>
       </div>
 
-      <%# Right column: floating PB mockup %>
-      <div class="landing-hero-visual">
-        <div class="landing-mockup">
-          <div class="landing-mockup-head">
-            <div class="landing-mockup-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                <path d="M4 22h16"/>
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-              </svg>
-              Personal Bests
-            </div>
-          </div>
+      <div class="rk-data-row">
+        <div class="rk-data-cell">
+          <div class="rk-data-index">[01]</div>
+          <div class="rk-data-num">5K—42K</div>
+          <div class="rk-data-label">Toda distancia</div>
+        </div>
+        <div class="rk-data-cell">
+          <div class="rk-data-index">[02]</div>
+          <div class="rk-data-num">RIEGEL</div>
+          <div class="rk-data-label">Predicción</div>
+        </div>
+        <div class="rk-data-cell">
+          <div class="rk-data-index">[03]</div>
+          <div class="rk-data-num">∞</div>
+          <div class="rk-data-label">Historial</div>
+        </div>
+      </div>
+    </div>
 
-          <div class="landing-mockup-grid">
-            <div class="lm-pb-card" style="--lm-color: #1e40af; --lm-light: #eff6ff;">
-              <div class="lm-pb-dist">5K</div>
-              <div class="lm-pb-time">18:42</div>
-              <div class="lm-pb-pace">3:44/km</div>
-            </div>
-            <div class="lm-pb-card" style="--lm-color: #7c3aed; --lm-light: #f5f3ff;">
-              <div class="lm-pb-dist">10K</div>
-              <div class="lm-pb-time">38:55</div>
-              <div class="lm-pb-pace">3:53/km</div>
-            </div>
-            <div class="lm-pb-card" style="--lm-color: #059669; --lm-light: #ecfdf5;">
-              <div class="lm-pb-dist">Half</div>
-              <div class="lm-pb-time">1:26:11</div>
-              <div class="lm-pb-pace">4:05/km</div>
-            </div>
-            <div class="lm-pb-card" style="--lm-color: #FF5C35; --lm-light: #fff3ee;">
-              <div class="lm-pb-dist">Marathon</div>
-              <div class="lm-pb-time">3:08:22</div>
-              <div class="lm-pb-pace">4:28/km</div>
-            </div>
-          </div>
+    <%# Mockup — raw bordered card, hard pink shadow, tilted %>
+    <div class="rk-hero-visual">
+      <div class="rk-mockup">
+        <div class="rk-mockup-head">
+          <div class="rk-mockup-title">// Mejores marcas</div>
+          <span class="rk-mockup-live">En vivo</span>
+        </div>
 
-          <div class="landing-mockup-divider"></div>
-
-          <div class="landing-pace-row">
-            <span class="landing-pace-row-label">Estimated Paces</span>
-            <span class="landing-pace-row-badge">5K &rarr; 18:28</span>
+        <div class="rk-pb-grid">
+          <div class="rk-pb-card">
+            <div class="rk-pb-dist">5K</div>
+            <div class="rk-pb-time">18:42</div>
+            <div class="rk-pb-pace">3:44 /km</div>
           </div>
+          <div class="rk-pb-card">
+            <div class="rk-pb-dist">10K</div>
+            <div class="rk-pb-time">38:55</div>
+            <div class="rk-pb-pace">3:53 /km</div>
+          </div>
+          <div class="rk-pb-card">
+            <div class="rk-pb-dist">Media</div>
+            <div class="rk-pb-time">1:26:11</div>
+            <div class="rk-pb-pace">4:05 /km</div>
+          </div>
+          <div class="rk-pb-card">
+            <div class="rk-pb-dist">Maratón</div>
+            <div class="rk-pb-time">3:08:22</div>
+            <div class="rk-pb-pace">4:28 /km</div>
+          </div>
+        </div>
+
+        <div class="rk-predict">
+          <span class="rk-predict-label">Predicción 5K</span>
+          <span class="rk-predict-badge">→ 18:28</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<%# Features section %>
-<section class="landing-features">
-  <div class="landing-container">
-    <p class="landing-section-label">What Arrow does</p>
-    <h2 class="landing-section-heading">Everything a competitive runner needs</h2>
+<%# ---------------------------------------------------------------- Marquee divider %>
+<div class="rk-marquee rk-marquee--rev">
+  <div class="rk-marquee-track">
+    <% 2.times do %>
+      <span>PB <b>·</b> 5K <b>·</b> 10K <b>·</b> 15K <b>·</b> 10 MILLAS <b>·</b> MEDIA <b>·</b> 30K <b>·</b> MARATÓN <b>·</b> </span>
+    <% end %>
+  </div>
+</div>
 
-    <div class="landing-features-grid">
-      <div class="landing-feature">
-        <div class="landing-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-            <path d="M4 22h16"/>
-            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-          </svg>
+<%# ---------------------------------------------------------------- Features %>
+<section class="rk-section rk-section--alt" id="features">
+  <div class="rk-container">
+    <div class="rk-section-head">
+      <h2 class="rk-section-heading">Todo lo que necesita un corredor</h2>
+      <p class="rk-section-label">// Qué hace Runark</p>
+    </div>
+
+    <div class="rk-features-grid">
+      <div class="rk-card">
+        <div class="rk-card-index">[01]</div>
+        <div class="rk-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
         </div>
-        <div class="landing-feature-title">Personal Bests</div>
-        <p class="landing-feature-body">See your fastest times for 5K through Marathon, always front and center.</p>
+        <h3 class="rk-feature-title">Mejores marcas</h3>
+        <p class="rk-feature-body">Tus tiempos más rápidos de 5K a maratón, siempre en primer plano. Sin scroll.</p>
       </div>
 
-      <div class="landing-feature">
-        <div class="landing-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3v18h18"/>
-            <path d="M18 17V9"/>
-            <path d="M13 17V5"/>
-            <path d="M8 17v-3"/>
-          </svg>
+      <div class="rk-card">
+        <div class="rk-card-index">[02]</div>
+        <div class="rk-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
         </div>
-        <div class="landing-feature-title">Pace Predictions</div>
-        <p class="landing-feature-body">From your latest race, Arrow calculates estimated finish times for every standard distance.</p>
+        <h3 class="rk-feature-title">Predicción</h3>
+        <p class="rk-feature-body">A partir de tu última carrera, Runark calcula tu tiempo estimado para cada distancia.</p>
       </div>
 
-      <div class="landing-feature">
-        <div class="landing-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-            <path d="m9 16 2 2 4-4"/>
-          </svg>
+      <div class="rk-card">
+        <div class="rk-card-index">[03]</div>
+        <div class="rk-feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
         </div>
-        <div class="landing-feature-title">Race History</div>
-        <p class="landing-feature-body">Catalog every race with name, location, and date. Never lose a time again.</p>
+        <h3 class="rk-feature-title">Historial</h3>
+        <p class="rk-feature-body">Cataloga cada carrera con nombre, lugar y fecha. No vuelvas a perder un tiempo.</p>
       </div>
     </div>
   </div>
 </section>
 
-<%# Bottom CTA section %>
-<section class="landing-cta">
-  <div class="landing-container">
-    <div class="landing-cta-inner">
-      <h2 class="landing-cta-heading">Ready to run smarter?</h2>
-      <p class="landing-cta-desc">Start tracking your performances today.</p>
-      <a href="<%= new_session_path %>" class="landing-btn-white">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/>
-          <line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
-        Log in to Arrow &rarr;
-      </a>
-      <div class="landing-footer">
-        <p class="landing-footer-text">&copy; 2024 Arrow. Built for runners.</p>
-      </div>
+<%# ---------------------------------------------------------------- CTA %>
+<section class="rk-section">
+  <div class="rk-container">
+    <div class="rk-cta-panel">
+      <h2 class="rk-cta-heading">¿Listo para<br>correr con cabeza?</h2>
+      <p class="rk-cta-desc">// Empieza a registrar tus marcas hoy mismo</p>
+      <%= link_to "Entrar en Runark →", new_session_path, class: "rk-btn rk-btn--ink" %>
     </div>
   </div>
 </section>
+
+<%# ---------------------------------------------------------------- Footer %>
+<footer class="rk-footer">
+  <div class="rk-container rk-footer-inner">
+    <a href="/" class="rk-logo">
+      <svg class="rk-logo-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="46" height="46" fill="#F43F8E" stroke="#0C0C0E" stroke-width="2"/>
+        <g fill="none" stroke="#0C0C0E" stroke-width="6" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M15 13 V36"/>
+          <path d="M15 13 H30 V24 H15"/>
+          <path d="M22 24 L31 36"/>
+        </g>
+      </svg>
+      <span class="rk-logo-text">Runark</span>
+    </a>
+    <p class="rk-footer-text">© <%= Date.current.year %> Runark — Hecho para corredores</p>
+  </div>
+</footer>
