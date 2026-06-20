@@ -1,4 +1,25 @@
-<p>
-  You can reset your password within the next 15 minutes on
-  <%= link_to "this password reset page", edit_password_url(@user.password_reset_token) %>.
+<h1 style="margin: 0 0 16px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #18181b;">Reset your password</h1>
+
+<p style="margin: 0 0 24px; font-size: 15px; line-height: 24px; color: #52525b;">
+  We received a request to reset the password for your Arrow account. Tap the button below to choose a new one.
+</p>
+
+<table role="presentation" cellpadding="0" cellspacing="0" style="margin: 0 0 24px;">
+  <tr>
+    <td align="center" style="border-radius: 10px; background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); background-color: #FF6B35;">
+      <a href="<%= edit_password_url(@user.password_reset_token) %>"
+         style="display: inline-block; padding: 14px 28px; font-size: 15px; font-weight: 700; color: #ffffff; text-decoration: none; border-radius: 10px;">
+        Reset password
+      </a>
+    </td>
+  </tr>
+</table>
+
+<p style="margin: 0 0 8px; font-size: 13px; line-height: 20px; color: #71717a;">
+  This link expires in <strong style="color: #52525b;">15 minutes</strong>.
+</p>
+
+<p style="margin: 0; font-size: 13px; line-height: 20px; color: #a1a1aa;">
+  If the button doesn't work, copy and paste this link into your browser:<br>
+  <a href="<%= edit_password_url(@user.password_reset_token) %>" style="color: #FF6B35; word-break: break-all;"><%= edit_password_url(@user.password_reset_token) %></a>
 </p>
