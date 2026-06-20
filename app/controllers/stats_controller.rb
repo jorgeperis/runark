@@ -34,7 +34,6 @@ class StatsController < ApplicationController
       Arel.sql("strftime('%m', runs.date)")
     ).count
 
-    @goals = current_user.goals.ordered
     @scoring_available = AgeGrading.available?
   end
 end

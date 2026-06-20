@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_20_120000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -37,16 +37,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_120000) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "goals", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.float "distance", null: false
-    t.integer "target_time", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id", "distance"], name: "index_goals_on_user_id_and_distance", unique: true
-    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "races", force: :cascade do |t|
@@ -239,7 +229,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_120000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "goals", "users"
   add_foreign_key "races", "races", column: "merged_into_id"
   add_foreign_key "run_tags", "runs"
   add_foreign_key "run_tags", "tags"

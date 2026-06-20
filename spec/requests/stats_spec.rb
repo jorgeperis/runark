@@ -30,7 +30,6 @@ RSpec.describe "Stats", type: :request do
 
         expect(response.body).to include("This Season")
         expect(response.body).to include("Activity Calendar")
-        expect(response.body).to include("Goals")
         expect(response.body).to include("Performance Score")
       end
 
@@ -48,12 +47,6 @@ RSpec.describe "Stats", type: :request do
         get stats_path
 
         expect(response.body).to include("100.0%")
-      end
-
-      it "shows goals with progress" do
-        create(:goal, user: user, distance: 10.0, target_time: 2400)
-        get stats_path
-        expect(response.body).to include("Target")
       end
     end
 

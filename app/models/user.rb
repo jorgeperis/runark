@@ -6,7 +6,6 @@ class User < ApplicationRecord
   def admin?
     admin
   end
-  has_many :goals, dependent: :destroy
 
   GENDERS = %w[female male].freeze
   DEFAULT_FAVOURITE_DISTANCES = COMMON_RACE_DISTANCES.keys.freeze
