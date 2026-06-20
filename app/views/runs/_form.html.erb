@@ -1,7 +1,7 @@
 <%= form_with(model: run, html: { contents: true }) do |form| %>
   <% if run.errors.any? %>
     <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
-      <h2 class="font-medium leading-none"><%= pluralize(run.errors.count, "error") %> prohibited this run from being saved:</h2>
+      <h2 class="font-medium leading-none"><%= t("runs.form.errors", count: run.errors.count) %></h2>
 
       <ul class="text-sm mis-3" style="list-style: disc">
         <% run.errors.each do |error| %>
@@ -17,10 +17,10 @@
     <% current_options = current_race ? [["#{current_race.name} — #{current_race.location} (#{current_race.distance} km)", current_race.id]] : [] %>
     <%= form.select :race_id,
         options_for_select(current_options, run.race_id),
-        { include_blank: "Search for a race…" },
+        { include_blank: t("runs.form.search_race") },
         data: { controller: "combobox", combobox_url_value: search_races_path,
-                combobox_no_results_value: "No race found" } %>
-    <%= link_to "Create new race →", new_race_path, class: "text-sm" %>
+                combobox_no_results_value: t("runs.form.no_race_found") } %>
+    <%= link_to t("runs.form.create_new_race"), new_race_path, class: "text-sm" %>
   </div>
 
   <div class="flex flex-col gap-half mbe-4">
@@ -31,27 +31,27 @@
   <div class="flex flex-col gap-half mbe-4" data-controller="distance-picker">
     <%= form.label :distance, class: "text-sm font-medium leading-none" %>
     <select class="input" data-distance-picker-target="select" data-action="distance-picker#select">
-      <option value="">Selecciona distancia…</option>
+      <option value=""><%= t("runs.form.select_distance") %></option>
       <% COMMON_RACE_DISTANCES.each do |km, data| %>
         <option value="<%= km %>"><%= data[:name] %></option>
       <% end %>
-      <option value="other">Otra…</option>
+      <option value="other"><%= t("runs.form.other_distance") %></option>
     </select>
     <%= form.number_field :distance, class: "input", step: "0.001", inputmode: :decimal, placeholder: "km", data: { distance_picker_target: "manualField" } %>
   </div>
 
   <div class="flex flex-col gap-half mbe-4">
     <%= form.label :time, class: "text-sm font-medium leading-none" %>
-    <%= form.text_field :time_formatted, class: "input", inputmode: "numeric", placeholder: "h:mm:ss", autocomplete: "off", data: { controller: "duration-input" } %>
+    <%= form.text_field :time_formatted, class: "input", inputmode: "numeric", placeholder: t("runs.form.time_placeholder"), autocomplete: "off", data: { controller: "duration-input" } %>
   </div>
 
   <div class="flex flex-col gap-half mbe-4">
-    <%= form.label :image, "Photo", class: "text-sm font-medium leading-none" %>
+    <%= form.label :image, t("runs.form.photo"), class: "text-sm font-medium leading-none" %>
     <% if run.image.attached? %>
       <%= image_tag run.image.variant(resize_to_limit: [ 400, 400 ]), class: "run-image-preview", alt: "" %>
       <label class="inline-flex items-center gap-half text-sm">
         <%= check_box_tag "run[remove_image]", "1", false %>
-        Remove current photo
+        <%= t("runs.form.remove_photo") %>
       </label>
     <% end %>
     <%= form.file_field :image, accept: "image/png,image/jpeg,image/webp", class: "input" %>

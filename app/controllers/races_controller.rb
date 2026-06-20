@@ -27,7 +27,7 @@ class RacesController < ApplicationController
 
     respond_to do |format|
       if @race.save
-        format.html { redirect_to @race, notice: "Race was successfully created." }
+        format.html { redirect_to @race, notice: t("flash.race.created") }
         format.json { render :show, status: :created, location: @race }
       else
         @existing_race = find_duplicate_race(@race) if @race.errors[:normalized_name].any?
@@ -40,7 +40,7 @@ class RacesController < ApplicationController
   def update
     respond_to do |format|
       if @race.update(race_params)
-        format.html { redirect_to @race, notice: "Race was successfully updated." }
+        format.html { redirect_to @race, notice: t("flash.race.updated") }
         format.json { render :show, status: :ok, location: @race }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class RacesController < ApplicationController
     @race.destroy!
 
     respond_to do |format|
-      format.html { redirect_to races_path, status: :see_other, notice: "Race was successfully destroyed." }
+      format.html { redirect_to races_path, status: :see_other, notice: t("flash.race.destroyed") }
       format.json { head :no_content }
     end
   end
@@ -68,11 +68,11 @@ class RacesController < ApplicationController
     target = target.canonical_race
 
     if target == @race
-      return redirect_to @race, alert: "Cannot merge a race into itself."
+      return redirect_to @race, alert: t("flash.race.merge_self")
     end
 
     if target.distance != @race.distance
-      return redirect_to @race, alert: "Cannot merge races with different distances."
+      return redirect_to @race, alert: t("flash.race.merge_distance")
     end
 
     Race.transaction do
@@ -81,7 +81,7 @@ class RacesController < ApplicationController
       Race.reset_counters(target.id, :runs)
     end
 
-    redirect_to target, notice: "\"#{@race.name}\" was merged into \"#{target.name}\"."
+    redirect_to target, notice: t("flash.race.merged", source: @race.name, target: target.name)
   end
 
   private
@@ -93,17 +93,17 @@ class RacesController < ApplicationController
   def require_editable_race
     return if @race.runs.where.not(user_id: current_user.id).none?
 
-    redirect_to @race, alert: "This race can't be edited because other runners have results on it."
+    redirect_to @race, alert: t("flash.race.not_editable")
   end
 
   def require_destroyable_race
     return if @race.runs.none?
 
-    redirect_to @race, alert: "This race can't be deleted because it has run results attached."
+    redirect_to @race, alert: t("flash.race.not_destroyable")
   end
 
   def require_admin
-    redirect_to root_path, alert: "Not authorized." unless current_user.admin?
+    redirect_to root_path, alert: t("flash.not_authorized") unless current_user.admin?
   end
 
   def find_duplicate_race(race)

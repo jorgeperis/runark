@@ -1,13 +1,18 @@
 .input {
   appearance: none;
-  background-color: var(--input-background, transparent);
+  background-color: var(--input-background, var(--rk-surface));
   block-size: var(--input-block-size, auto);
-  border: 1px solid var(--input-border-color, var(--color-border));
-  border-radius: var(--input-radius, var(--rounded-md));
-  box-shadow: var(--input-box-shadow, var(--shadow-xs));
+  border: 2px solid var(--input-border-color, var(--rk-ink));
+  border-radius: var(--input-radius, 0);
+  box-shadow: var(--input-box-shadow, none);
   font-size: var(--input-font-size, var(--text-sm));
   inline-size: var(--input-inline-size, var(--size-full));
-  padding: var(--input-padding, .375rem .75rem);
+  padding: var(--input-padding, .45rem .75rem);
+
+  &:focus-visible {
+    outline: 2px solid var(--rk-pink);
+    outline-offset: 2px;
+  }
 
   &:is(textarea[rows=auto]) {
     field-sizing: content;

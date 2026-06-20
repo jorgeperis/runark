@@ -1,28 +1,30 @@
 .card {
   background-color: var(--color-bg);
-  border-radius: var(--rounded-2xl);
-  border: 1px solid var(--color-border-light);
+  border-radius: 0;
+  border: var(--rk-line);
   padding: var(--size-6);
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  box-shadow: var(--rk-shadow-ink);
 }
 
 @media (max-width: 48rem) {
   .card {
     padding: var(--size-4);
     margin: var(--size-2) 0;
-    border-radius: var(--rounded-xl);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 0 var(--rk-ink);
   }
 }
 
 .card-selectable {
   background-color: var(--color-bg);
-  border-radius: var(--rounded-xl);
-  border: 1px solid var(--color-border);
+  border-radius: 0;
+  border: var(--rk-line);
   padding: var(--size-3);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 
   &:has(:checked) {
     background-color: var(--color-selected);
-    border-color: var(--color-primary);
+    border-color: var(--rk-pink);
+    box-shadow: var(--rk-shadow-pink);
   }
 }

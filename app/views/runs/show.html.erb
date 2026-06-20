@@ -5,18 +5,18 @@
 <div class="run-hero">
   <div class="run-hero-header">
     <h1 class="run-race-name"><%= @run.race.name %></h1>
-    <span class="run-date"><%= @run.date.strftime("%B %d, %Y") %></span>
+    <span class="run-date"><%= l(@run.date, format: :long) %></span>
   </div>
 
   <div class="run-time-display">
-    <span class="run-time-label">Finish Time</span>
+    <span class="run-time-label"><%= t("runs.show.finish_time") %></span>
     <span class="run-time"><%= decorated_time_for(@run.time) %></span>
   </div>
 </div>
 
 <% if @run.image.attached? %>
   <div class="run-photo">
-    <%= image_tag @run.image.variant(resize_to_limit: [ 1200, 1200 ]), class: "run-photo-img", loading: "lazy", alt: "Photo from #{@run.full_name}" %>
+    <%= image_tag @run.image.variant(resize_to_limit: [ 1200, 1200 ]), class: "run-photo-img", loading: "lazy", alt: t("runs.show.photo_alt", name: @run.full_name) %>
   </div>
 <% end %>
 
@@ -26,7 +26,7 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
     </svg>
     <span class="run-stat-value"><%= decorated_distance_for(@run.distance) %></span>
-    <span class="run-stat-label">Distance</span>
+    <span class="run-stat-label"><%= t("runs.show.distance") %></span>
   </div>
 
   <div class="run-stat-card">
@@ -34,11 +34,11 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
     </svg>
     <span class="run-stat-value"><%= decorated_time_for(@run.pace) %></span>
-    <span class="run-stat-label">Pace /km</span>
+    <span class="run-stat-label"><%= t("runs.show.pace_km") %></span>
   </div>
 </div>
 
 <div class="page-actions">
-  <%= link_to "Edit", edit_run_path(@run), class: "btn btn--primary" %>
-  <%= button_to "Delete", @run, method: :delete, class: "btn btn--negative", data: { turbo_confirm: "Are you sure?" } %>
+  <%= link_to t("runs.show.edit"), edit_run_path(@run), class: "btn btn--primary" %>
+  <%= button_to t("runs.show.delete"), @run, method: :delete, class: "btn btn--negative", data: { turbo_confirm: t("runs.show.confirm_delete") } %>
 </div>

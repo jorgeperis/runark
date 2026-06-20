@@ -19,8 +19,8 @@ RSpec.describe "Stats", type: :request do
         get stats_path
 
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Races")
-        expect(response.body).to include("Progression")
+        expect(response.body).to include("Carreras")
+        expect(response.body).to include("Progresión")
         expect(response.body).to include(run_path(latest))
         expect(response.body).to include(race.name)
       end
@@ -28,9 +28,9 @@ RSpec.describe "Stats", type: :request do
       it "renders the new sections" do
         get stats_path
 
-        expect(response.body).to include("This Season")
-        expect(response.body).to include("Activity Calendar")
-        expect(response.body).to include("Performance Score")
+        expect(response.body).to include("Esta temporada")
+        expect(response.body).to include("Calendario de actividad")
+        expect(response.body).to include("Puntuación de rendimiento")
       end
 
       it "prompts to complete the profile for scoring when it is missing" do

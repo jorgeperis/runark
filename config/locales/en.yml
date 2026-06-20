@@ -1,31 +1,231 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  nav:
+    stats: "Stats"
+    races: "Races"
+    runs: "Marks"
+    log_in: "Log in"
+    log_out: "Log out"
+    language: "Language"
+
+  sessions:
+    new:
+      title: "Sign in"
+      email_placeholder: "Enter your email address"
+      password_placeholder: "Enter your password"
+      submit: "Sign in"
+      forgot_password: "Forgot password?"
+
+  passwords:
+    new:
+      title: "Forgot your password?"
+      email_placeholder: "Enter your email address"
+      submit: "Email reset instructions"
+    edit:
+      title: "Update your password"
+      password_placeholder: "Enter new password"
+      password_confirmation_placeholder: "Repeat new password"
+      submit: "Save"
+
+  profiles:
+    edit:
+      title: "Profile"
+      intro: "Your sex and date of birth are used for age-graded performance scoring."
+      prefer_not_to_say: "Prefer not to say"
+      save: "Save profile"
+      favourite_distances_title: "Favourite distances"
+      favourite_distances_intro: "Pick the distances shown on your stats page (top marks, progression and estimated paces)."
+      save_favourite_distances: "Save favourite distances"
+      errors:
+        one: "1 error prohibited your profile from being saved:"
+        other: "%{count} errors prohibited your profile from being saved:"
+
+  stats:
+    index:
+      title: "Your Stats"
+      subtitle: "Track your running journey"
+      numbers:
+        races: "Races"
+        distance_raced: "Distance raced"
+        time_racing: "Time racing"
+        in_year: "In %{year}"
+      personal_bests: "Personal Bests"
+      performance_score: "Performance Score"
+      age_graded: "Age-graded"
+      age_grading_info: "Age-grading compares your race time against the world-standard time for someone of your sex and age, shown as a percentage. Around 100% is world-class for your age group — the higher the score, the stronger the performance. It lets you compare results fairly across different distances and ages."
+      add_profile_link: "Add your sex and date of birth"
+      add_profile_suffix: "to unlock age-graded performance scoring."
+      scoring_unavailable: "Scoring tables are being added — your age-graded performance will appear here soon."
+      progression: "Progression"
+      best_time_per_year: "Best time per year"
+      progression_aria: "%{name} best times from %{from} to %{to}"
+      progression_empty: "Race a distance in two or more years to see your progression here."
+      this_season: "This Season"
+      season_vs: "vs %{year}"
+      season_no_previous: "No %{year} result"
+      season_empty: "No races yet in %{year}. Your season bests will show up here."
+      estimated_paces: "Estimated Paces"
+      estimated_paces_info: "These are predicted times for other distances, projected from your most recent race with Riegel's formula (a standard endurance model). They assume comparable fitness and conditions, so treat them as a rough guide rather than a guarantee."
+      based_on: "Based on %{race}"
+      activity_calendar: "Activity Calendar"
+      calendar_empty: "Log a race to start building your activity calendar."
+      calendar_cell_title: "%{month} %{year}: %{count} %{races}"
+      race_count:
+        one: "race"
+        other: "races"
+      top_three: "Top 3 by Distance"
+      edit_distances: "Edit distances"
+    finish_time: "Finish Time"
+    info_disclosure: "How is this calculated?"
+
+  races:
+    index:
+      title: "Races"
+      new_race: "New race"
+      best: "Best"
+    show:
+      certificate: "Certificate:"
+      edit_this_race: "Edit this race"
+      back_to_races: "Back to races"
+      destroy_this_race: "Destroy this race"
+      merge_confirm: "Merge \"%{name}\" into the selected race? This cannot be undone."
+      select_merge: "Select race to merge into…"
+      merge: "Merge →"
+      runs: "Runs"
+    new:
+      title: "New race"
+      back_to_races: "Back to races"
+    edit:
+      title: "Editing race"
+      show_this_race: "Show this race"
+      back_to_races: "Back to races"
+    form:
+      errors:
+        one: "1 error prohibited this race from being saved:"
+        other: "%{count} errors prohibited this race from being saved:"
+      existing_race: "A race with this name already exists."
+      view_existing: "View %{name} →"
+      certificate_placeholder: "e.g. RFEA-2024-1234"
+    race:
+      location: "Location:"
+      distance: "Distance:"
+
+  runs:
+    index:
+      title: "Runs"
+      new_run: "New run"
+      search_placeholder: "Search by name…"
+      all_years: "All years"
+      all_distances: "All distances"
+      all_races: "All races"
+    table:
+      name: "Name"
+      date: "Date"
+      distance: "Distance"
+      time: "Time"
+      pace: "Pace"
+      pb: "PB"
+      pb_title: "Your best time at this distance"
+      empty: "No runs match your filters yet."
+      add_first: "Add your first run"
+    show:
+      finish_time: "Finish Time"
+      distance: "Distance"
+      pace_km: "Pace /km"
+      photo_alt: "Photo from %{name}"
+      edit: "Edit"
+      delete: "Delete"
+      confirm_delete: "Are you sure?"
+    new:
+      title: "New run"
+      back_to_runs: "Back to runs"
+    edit:
+      title: "Editing run"
+      show_this_run: "Show this run"
+      back_to_runs: "Back to runs"
+    form:
+      errors:
+        one: "1 error prohibited this run from being saved:"
+        other: "%{count} errors prohibited this run from being saved:"
+      search_race: "Search for a race…"
+      no_race_found: "No race found"
+      create_new_race: "Create new race →"
+      select_distance: "Select distance…"
+      other_distance: "Other…"
+      time_placeholder: "h:mm:ss"
+      photo: "Photo"
+      remove_photo: "Remove current photo"
+
+  passwords_mailer:
+    reset:
+      subject: "Reset your password"
+      heading: "Reset your password"
+      intro: "We received a request to reset the password for your Runark account. Tap the button below to choose a new one."
+      button: "Reset password"
+      expires_html: "This link expires in <strong style=\"color: #52525b;\">15 minutes</strong>."
+      expires_text: "This link expires in 15 minutes."
+      fallback: "If the button doesn't work, copy and paste this link into your browser:"
+      ignore: "If you didn't request this, you can safely ignore this email."
+
+  activerecord:
+    models:
+      user: "User"
+      race: "Race"
+      run: "Run"
+    attributes:
+      user:
+        email_address: "Email address"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        gender: "Sex"
+        birthdate: "Date of birth"
+      race:
+        name: "Name"
+        location: "Location"
+        distance: "Distance"
+        certificate_number: "Certificate number"
+      run:
+        race_id: "Race"
+        date: "Date"
+        distance: "Distance"
+        time: "Time"
+        time_formatted: "Time"
+        image: "Photo"
+
+  flash:
+    not_authorized: "Not authorized."
+    profile_updated: "Profile was successfully updated."
+    password:
+      reset_sent: "Password reset instructions sent (if user with that email address exists)."
+      reset_done: "Password has been reset."
+      mismatch: "Passwords did not match."
+      invalid_token: "Password reset link is invalid or has expired."
+    session:
+      rate_limited: "Try again later."
+      invalid: "Try another email address or password."
+    race:
+      created: "Race was successfully created."
+      updated: "Race was successfully updated."
+      destroyed: "Race was successfully destroyed."
+      merge_self: "Cannot merge a race into itself."
+      merge_distance: "Cannot merge races with different distances."
+      merged: "\"%{source}\" was merged into \"%{target}\"."
+      not_editable: "This race can't be edited because other runners have results on it."
+      not_destroyable: "This race can't be deleted because it has run results attached."
+    run:
+      created: "Run was successfully created."
+      updated: "Run was successfully updated."
+      destroyed: "Run was successfully destroyed."
+
+  mailers:
+    layout:
+      footer: "You're receiving this email because a password reset was requested for your Runark account. If it wasn't you, you can safely ignore this message."
+
+  helpers:
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+      submit: "Save %{model}"
+
+  genders:
+    female: "Female"
+    male: "Male"

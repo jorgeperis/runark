@@ -1,22 +1,22 @@
 .btn {
-  --btn-background: #FFF3EE;
-  --hover-color: #FFE4D6;
-  --btn-default-border: #FECDBB;
-  --btn-default-color: #C93F18;
+  --btn-background: var(--rk-surface);
+  --hover-color: var(--rk-surface-subtle);
+  --btn-default-border: var(--rk-ink);
+  --btn-default-color: var(--rk-ink);
 
   align-items: center;
   background-color: var(--btn-background);
   block-size: var(--btn-block-size, auto);
-  border-radius: var(--btn-radius, var(--rounded-lg));
-  border: 1px solid var(--btn-border-color, var(--btn-default-border));
+  border-radius: var(--btn-radius, 0);
+  border: 2px solid var(--btn-border-color, var(--btn-default-border));
   box-shadow: var(--btn-box-shadow, none);
   color: var(--btn-color, var(--btn-default-color));
   column-gap: var(--size-2);
   cursor: pointer;
   display: inline-flex;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--rk-text-font);
   font-size: var(--btn-font-size, var(--text-sm));
-  font-weight: var(--btn-font-weight, 600);
+  font-weight: var(--btn-font-weight, 700);
   letter-spacing: 0.01em;
   inline-size: var(--btn-inline-size, auto);
   justify-content: var(--btn-justify-content, center);
@@ -24,7 +24,7 @@
   position: relative;
   text-align: var(--btn-text-align, center);
   white-space: nowrap;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.15s ease, box-shadow 0.12s ease, transform 0.08s ease;
 
   img:not([class]) {
     filter: var(--btn-icon-color, var(--color-filter-text));
@@ -35,7 +35,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-selected-dark);
+    outline: 2px solid var(--rk-pink);
     outline-offset: 2px;
   }
 
@@ -46,29 +46,29 @@
 }
 
 .btn--primary {
-  --btn-background: var(--color-accent);
-  --btn-border-color: transparent;
+  --btn-background: var(--rk-pink);
+  --btn-border-color: var(--rk-ink);
   --btn-color: white;
   --btn-icon-color: invert(1);
-  --btn-hover-color: var(--color-accent-dark);
-  box-shadow: 0 2px 8px rgba(255, 92, 53, 0.28);
+  --btn-hover-color: var(--rk-pink-deep);
+  box-shadow: var(--rk-shadow-ink);
 
   &:hover {
-    box-shadow: 0 4px 14px rgba(255, 92, 53, 0.38);
-    transform: translateY(-1px);
+    box-shadow: 6px 6px 0 0 var(--rk-ink);
+    transform: translate(-2px, -2px);
   }
 
   &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(255, 92, 53, 0.28);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--rk-ink);
   }
 }
 
 .btn--secondary {
-  --btn-background: transparent;
-  --btn-border-color: var(--color-border);
-  --btn-color: var(--color-text-subtle);
-  --btn-hover-color: var(--color-border-light);
+  --btn-background: var(--rk-surface);
+  --btn-border-color: var(--rk-ink);
+  --btn-color: var(--rk-ink);
+  --btn-hover-color: var(--rk-surface-subtle);
 }
 
 .btn--borderless {
@@ -105,7 +105,7 @@
 .btn--small {
   --btn-padding: .3rem .7rem;
   --btn-font-size: var(--text-xs);
-  --btn-radius: var(--rounded-md);
+  --btn-radius: 0;
 }
 
 [aria-busy] .btn--loading:disabled {

@@ -2,17 +2,17 @@
   <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
 <% end %>
 
-<% content_for :title, "Profile" %>
+<% content_for :title, t("profiles.edit.title") %>
 
-<h1 class="font-bold text-4xl mbe-4">Profile</h1>
+<h1 class="font-bold text-4xl mbe-4"><%= t("profiles.edit.title") %></h1>
 
 <div class="card">
-  <p class="text-sm text-subtle mbe-4">Your sex and date of birth are used for age-graded performance scoring.</p>
+  <p class="text-sm text-subtle mbe-4"><%= t("profiles.edit.intro") %></p>
 
   <%= form_with(model: @user, url: profile_path, method: :patch) do |form| %>
     <% if @user.errors.any? %>
       <div class="alert alert--negative flex flex-col gap-half mbe-4" role="alert">
-        <h2 class="font-medium leading-none"><%= pluralize(@user.errors.count, "error") %> prohibited your profile from being saved:</h2>
+        <h2 class="font-medium leading-none"><%= t("profiles.edit.errors", count: @user.errors.count) %></h2>
         <ul class="text-sm mis-3" style="list-style: disc">
           <% @user.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -22,24 +22,24 @@
     <% end %>
 
     <div class="flex flex-col gap-half mbe-4">
-      <%= form.label :gender, "Sex", class: "text-sm font-medium leading-none" %>
+      <%= form.label :gender, class: "text-sm font-medium leading-none" %>
       <%= form.select :gender,
-            options_for_select(User::GENDERS.map { |g| [ g.capitalize, g ] }, @user.gender),
-            { include_blank: "Prefer not to say" }, class: "input" %>
+            options_for_select(User::GENDERS.map { |g| [ t("genders.#{g}"), g ] }, @user.gender),
+            { include_blank: t("profiles.edit.prefer_not_to_say") }, class: "input" %>
     </div>
 
     <div class="flex flex-col gap-half mbe-4">
-      <%= form.label :birthdate, "Date of birth", class: "text-sm font-medium leading-none" %>
+      <%= form.label :birthdate, class: "text-sm font-medium leading-none" %>
       <%= form.date_field :birthdate, class: "input input--datepicker", data: { controller: "datepicker" } %>
     </div>
 
-    <%= form.submit "Save profile", class: "btn btn--primary" %>
+    <%= form.submit t("profiles.edit.save"), class: "btn btn--primary" %>
   <% end %>
 </div>
 
 <div class="card mbs-4">
-  <h2 class="font-bold text-xl mbe-2">Favourite distances</h2>
-  <p class="text-sm text-subtle mbe-4">Pick the distances shown on your stats page (top marks, progression and estimated paces).</p>
+  <h2 class="font-bold text-xl mbe-2"><%= t("profiles.edit.favourite_distances_title") %></h2>
+  <p class="text-sm text-subtle mbe-4"><%= t("profiles.edit.favourite_distances_intro") %></p>
 
   <%= form_with(model: @user, url: profile_path, method: :patch) do |form| %>
     <div class="flex flex-col gap-half mbe-4">
@@ -52,6 +52,6 @@
       <%= hidden_field_tag "user[favourite_distances][]", "" %>
     </div>
 
-    <%= form.submit "Save favourite distances", class: "btn btn--primary" %>
+    <%= form.submit t("profiles.edit.save_favourite_distances"), class: "btn btn--primary" %>
   <% end %>
 </div>

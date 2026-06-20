@@ -2,30 +2,30 @@
   <div popover class="flash" style="--flash-position: 5rem;" data-controller="element-removal" data-action="animationend->element-removal#remove" role="alert"><%= notice %></div>
 <% end %>
 
-<% content_for :title, "Runs" %>
+<% content_for :title, t("runs.index.title") %>
 
 <div class="flex items-center justify-between mbe-4">
-  <h1 class="font-bold text-4xl">Runs</h1>
-  <%= link_to "New run", new_run_path, class: "btn btn--primary" %>
+  <h1 class="font-bold text-4xl"><%= t("runs.index.title") %></h1>
+  <%= link_to t("runs.index.new_run"), new_run_path, class: "btn btn--primary" %>
 </div>
 
 <%= form_with url: runs_path, method: :get, data: { turbo_frame: "runs", turbo_action: "advance", controller: "auto-submit" } do %>
   <div class="runs-filters flex flex-wrap gap-half mbe-4">
-    <%= text_field_tag :q, params[:q], placeholder: "Search by name…", class: "input", style: "--input-inline-size: 16rem; max-inline-size: 100%;", data: { action: "input->auto-submit#submit" } %>
+    <%= text_field_tag :q, params[:q], placeholder: t("runs.index.search_placeholder"), class: "input", style: "--input-inline-size: 16rem; max-inline-size: 100%;", data: { action: "input->auto-submit#submit" } %>
 
     <%= select_tag :year,
           options_for_select(@years, params[:year]),
-          include_blank: "All years",
+          include_blank: t("runs.index.all_years"),
           data: { controller: "combobox", action: "change->auto-submit#submit" } %>
 
     <%= select_tag :distance,
           options_for_select(@distances.map { |d| [ decorated_distance_for(d), d ] }, params[:distance]),
-          include_blank: "All distances",
+          include_blank: t("runs.index.all_distances"),
           data: { controller: "combobox", action: "change->auto-submit#submit" } %>
 
     <%= select_tag :race_id,
           options_for_select(@races.map { |race| [ race.name, race.id ] }, params[:race_id]),
-          include_blank: "All races",
+          include_blank: t("runs.index.all_races"),
           data: { controller: "combobox", action: "change->auto-submit#submit" } %>
 
     <%= hidden_field_tag :sort, @sort %>

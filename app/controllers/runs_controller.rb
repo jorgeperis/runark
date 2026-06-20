@@ -39,7 +39,7 @@ class RunsController < ApplicationController
 
     respond_to do |format|
       if @run.save
-        format.html { redirect_to @run, notice: "Run was successfully created." }
+        format.html { redirect_to @run, notice: t("flash.run.created") }
         format.json { render :show, status: :created, location: @run }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class RunsController < ApplicationController
 
     respond_to do |format|
       if @run.update(run_params)
-        format.html { redirect_to @run, notice: "Run was successfully updated." }
+        format.html { redirect_to @run, notice: t("flash.run.updated") }
         format.json { render :show, status: :ok, location: @run }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -68,7 +68,7 @@ class RunsController < ApplicationController
     @run.destroy!
 
     respond_to do |format|
-      format.html { redirect_to runs_path, status: :see_other, notice: "Run was successfully destroyed." }
+      format.html { redirect_to runs_path, status: :see_other, notice: t("flash.run.destroyed") }
       format.json { head :no_content }
     end
   end

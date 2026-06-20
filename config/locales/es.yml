@@ -1,0 +1,248 @@
+es:
+  nav:
+    stats: "Estadísticas"
+    races: "Carreras"
+    runs: "Marcas"
+    log_in: "Entrar"
+    log_out: "Salir"
+    language: "Idioma"
+
+  sessions:
+    new:
+      title: "Iniciar sesión"
+      email_placeholder: "Introduce tu correo"
+      password_placeholder: "Introduce tu contraseña"
+      submit: "Entrar"
+      forgot_password: "¿Olvidaste tu contraseña?"
+
+  passwords:
+    new:
+      title: "¿Olvidaste tu contraseña?"
+      email_placeholder: "Introduce tu correo"
+      submit: "Enviar instrucciones"
+    edit:
+      title: "Actualiza tu contraseña"
+      password_placeholder: "Nueva contraseña"
+      password_confirmation_placeholder: "Repite la nueva contraseña"
+      submit: "Guardar"
+
+  profiles:
+    edit:
+      title: "Perfil"
+      intro: "Tu sexo y fecha de nacimiento se usan para la puntuación de rendimiento por edad."
+      prefer_not_to_say: "Prefiero no decirlo"
+      save: "Guardar perfil"
+      favourite_distances_title: "Distancias favoritas"
+      favourite_distances_intro: "Elige las distancias que aparecen en tus estadísticas (mejores marcas, progresión y ritmos estimados)."
+      save_favourite_distances: "Guardar distancias favoritas"
+      errors:
+        one: "1 error impidió guardar tu perfil:"
+        other: "%{count} errores impidieron guardar tu perfil:"
+
+  stats:
+    index:
+      title: "Tus estadísticas"
+      subtitle: "Sigue tu progreso como corredor"
+      numbers:
+        races: "Carreras"
+        distance_raced: "Distancia competida"
+        time_racing: "Tiempo compitiendo"
+        in_year: "En %{year}"
+      personal_bests: "Mejores marcas"
+      performance_score: "Puntuación de rendimiento"
+      age_graded: "Por edad"
+      age_grading_info: "La puntuación por edad compara tu tiempo con el tiempo estándar mundial para alguien de tu sexo y edad, expresado en porcentaje. En torno al 100% es nivel mundial para tu grupo de edad: cuanto más alta la puntuación, mejor el rendimiento. Permite comparar resultados de forma justa entre distancias y edades distintas."
+      add_profile_link: "Añade tu sexo y fecha de nacimiento"
+      add_profile_suffix: "para desbloquear la puntuación de rendimiento por edad."
+      scoring_unavailable: "Se están añadiendo las tablas de puntuación; tu rendimiento por edad aparecerá aquí pronto."
+      progression: "Progresión"
+      best_time_per_year: "Mejor tiempo por año"
+      progression_aria: "%{name}: mejores tiempos de %{from} a %{to}"
+      progression_empty: "Compite una distancia en dos o más años para ver aquí tu progresión."
+      this_season: "Esta temporada"
+      season_vs: "vs %{year}"
+      season_no_previous: "Sin resultado de %{year}"
+      season_empty: "Aún no hay carreras en %{year}. Tus mejores marcas de la temporada aparecerán aquí."
+      estimated_paces: "Ritmos estimados"
+      estimated_paces_info: "Son tiempos previstos para otras distancias, proyectados desde tu carrera más reciente con la fórmula de Riegel (un modelo estándar de resistencia). Asumen una forma física y condiciones comparables, así que tómalos como una guía orientativa, no como una garantía."
+      based_on: "Basado en %{race}"
+      activity_calendar: "Calendario de actividad"
+      calendar_empty: "Registra una carrera para empezar a construir tu calendario de actividad."
+      calendar_cell_title: "%{month} %{year}: %{count} %{races}"
+      race_count:
+        one: "carrera"
+        other: "carreras"
+      top_three: "Top 3 por distancia"
+      edit_distances: "Editar distancias"
+    finish_time: "Tiempo de meta"
+    info_disclosure: "¿Cómo se calcula?"
+
+  races:
+    index:
+      title: "Carreras"
+      new_race: "Nueva carrera"
+      best: "Mejor"
+    show:
+      certificate: "Certificado:"
+      edit_this_race: "Editar esta carrera"
+      back_to_races: "Volver a carreras"
+      destroy_this_race: "Eliminar esta carrera"
+      merge_confirm: "¿Fusionar «%{name}» en la carrera seleccionada? Esto no se puede deshacer."
+      select_merge: "Selecciona la carrera de destino…"
+      merge: "Fusionar →"
+      runs: "Marcas"
+    new:
+      title: "Nueva carrera"
+      back_to_races: "Volver a carreras"
+    edit:
+      title: "Editar carrera"
+      show_this_race: "Ver esta carrera"
+      back_to_races: "Volver a carreras"
+    form:
+      errors:
+        one: "1 error impidió guardar esta carrera:"
+        other: "%{count} errores impidieron guardar esta carrera:"
+      existing_race: "Ya existe una carrera con este nombre."
+      view_existing: "Ver %{name} →"
+      certificate_placeholder: "p. ej. RFEA-2024-1234"
+    race:
+      location: "Ubicación:"
+      distance: "Distancia:"
+
+  runs:
+    index:
+      title: "Marcas"
+      new_run: "Nueva marca"
+      search_placeholder: "Buscar por nombre…"
+      all_years: "Todos los años"
+      all_distances: "Todas las distancias"
+      all_races: "Todas las carreras"
+    table:
+      name: "Nombre"
+      date: "Fecha"
+      distance: "Distancia"
+      time: "Tiempo"
+      pace: "Ritmo"
+      pb: "RP"
+      pb_title: "Tu mejor tiempo en esta distancia"
+      empty: "Ninguna marca coincide con tus filtros todavía."
+      add_first: "Añade tu primera marca"
+    show:
+      finish_time: "Tiempo de meta"
+      distance: "Distancia"
+      pace_km: "Ritmo /km"
+      photo_alt: "Foto de %{name}"
+      edit: "Editar"
+      delete: "Eliminar"
+      confirm_delete: "¿Seguro?"
+    new:
+      title: "Nueva marca"
+      back_to_runs: "Volver a marcas"
+    edit:
+      title: "Editar marca"
+      show_this_run: "Ver esta marca"
+      back_to_runs: "Volver a marcas"
+    form:
+      errors:
+        one: "1 error impidió guardar esta marca:"
+        other: "%{count} errores impidieron guardar esta marca:"
+      search_race: "Busca una carrera…"
+      no_race_found: "No se encontró ninguna carrera"
+      create_new_race: "Crear nueva carrera →"
+      select_distance: "Selecciona distancia…"
+      other_distance: "Otra…"
+      time_placeholder: "h:mm:ss"
+      photo: "Foto"
+      remove_photo: "Quitar la foto actual"
+
+  passwords_mailer:
+    reset:
+      subject: "Restablece tu contraseña"
+      heading: "Restablece tu contraseña"
+      intro: "Hemos recibido una solicitud para restablecer la contraseña de tu cuenta de Runark. Pulsa el botón de abajo para elegir una nueva."
+      button: "Restablecer contraseña"
+      expires_html: "Este enlace caduca en <strong style=\"color: #52525b;\">15 minutos</strong>."
+      expires_text: "Este enlace caduca en 15 minutos."
+      fallback: "Si el botón no funciona, copia y pega este enlace en tu navegador:"
+      ignore: "Si no solicitaste esto, puedes ignorar este correo con tranquilidad."
+
+  activerecord:
+    models:
+      user: "Usuario"
+      race: "Carrera"
+      run: "Marca"
+    attributes:
+      user:
+        email_address: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        gender: "Sexo"
+        birthdate: "Fecha de nacimiento"
+      race:
+        name: "Nombre"
+        location: "Ubicación"
+        distance: "Distancia"
+        certificate_number: "Número de certificado"
+      run:
+        race_id: "Carrera"
+        date: "Fecha"
+        distance: "Distancia"
+        time: "Tiempo"
+        time_formatted: "Tiempo"
+        image: "Foto"
+
+  flash:
+    not_authorized: "No autorizado."
+    profile_updated: "Tu perfil se ha actualizado correctamente."
+    password:
+      reset_sent: "Instrucciones de restablecimiento enviadas (si existe un usuario con ese correo)."
+      reset_done: "Tu contraseña se ha restablecido."
+      mismatch: "Las contraseñas no coinciden."
+      invalid_token: "El enlace de restablecimiento no es válido o ha caducado."
+    session:
+      rate_limited: "Inténtalo de nuevo más tarde."
+      invalid: "Prueba con otro correo o contraseña."
+    race:
+      created: "La carrera se ha creado correctamente."
+      updated: "La carrera se ha actualizado correctamente."
+      destroyed: "La carrera se ha eliminado correctamente."
+      merge_self: "No se puede fusionar una carrera consigo misma."
+      merge_distance: "No se pueden fusionar carreras de distancias distintas."
+      merged: "«%{source}» se fusionó en «%{target}»."
+      not_editable: "Esta carrera no se puede editar porque otros corredores tienen resultados en ella."
+      not_destroyable: "Esta carrera no se puede eliminar porque tiene resultados asociados."
+    run:
+      created: "La marca se ha creado correctamente."
+      updated: "La marca se ha actualizado correctamente."
+      destroyed: "La marca se ha eliminado correctamente."
+
+  mailers:
+    layout:
+      footer: "Recibes este correo porque se solicitó un restablecimiento de contraseña para tu cuenta de Runark. Si no fuiste tú, puedes ignorar este mensaje con tranquilidad."
+
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Guardar %{model}"
+      submit: "Guardar %{model}"
+
+  genders:
+    female: "Mujer"
+    male: "Hombre"
+
+  date:
+    formats:
+      default: "%-d/%m/%Y"
+      long: "%-d de %B de %Y"
+      long_day: "%-d %b %Y"
+      month_year: "%b %Y"
+    month_names: [~, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+    abbr_month_names: [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+    day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+    abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+
+  time:
+    formats:
+      default: "%-d de %B de %Y a las %H:%M"
+      long: "%-d de %B de %Y a las %H:%M"
+      short: "%-d %b %H:%M"

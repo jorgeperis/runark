@@ -25,5 +25,10 @@ module Arrow
     # config.eager_load_paths << Rails.root.join("extras")
     #
     config.active_storage.variant_processor = :vips
+
+    # Internationalization: Spanish by default, English ready for the future.
+    config.i18n.default_locale = :es
+    config.i18n.available_locales = [ :es, :en ]
+    config.i18n.fallbacks = [ :en ]
   end
 end

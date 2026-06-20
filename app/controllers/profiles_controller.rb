@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
     @user = current_user
 
     if @user.update(profile_params)
-      redirect_to edit_profile_path, notice: "Profile was successfully updated."
+      redirect_to edit_profile_path, notice: t("flash.profile_updated")
     else
       render :edit, status: :unprocessable_entity
     end

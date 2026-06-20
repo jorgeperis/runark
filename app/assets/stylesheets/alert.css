@@ -1,6 +1,6 @@
 .alert {
-  border: 1px solid var(--alert-border-color, var(--color-border));
-  border-radius: var(--rounded-lg);
+  border: 2px solid var(--alert-border-color, var(--rk-ink));
+  border-radius: 0;
   color: var(--alert-color, var(--color-text));
   font-size: var(--text-sm);
   inline-size: var(--size-full);

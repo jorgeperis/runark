@@ -1,9 +1,9 @@
-<% content_for :title, "New race" %>
+<% content_for :title, t("races.new.title") %>
 
-<h1 class="font-bold text-4xl mbe-4">New race</h1>
+<h1 class="font-bold text-4xl mbe-4"><%= t("races.new.title") %></h1>
 
 <%= render "form", race: @race %>
 
 <div class="inline-flex flex-wrap items-center gap mbs-2" style="--row-gap: .5rem">
-  <%= link_to "Back to races", races_path, class: "btn" %>
+  <%= link_to t("races.new.back_to_races"), races_path, class: "btn" %>
 </div>

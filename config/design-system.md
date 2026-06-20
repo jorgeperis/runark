@@ -4,8 +4,10 @@
 > patrones de componente. La landing (`app/views/pages/home.html.erb` +
 > `app/assets/stylesheets/runark_landing.css`) es la primera implementación de referencia.
 >
-> **Estado:** v0.1 — landing. El resto de la app sigue con el tema antiguo (naranja/claro)
-> hasta que se migre pantalla a pantalla siguiendo este documento.
+> **Estado:** v0.2 — rebrand completo. La landing es la referencia **oscura**; la app interna
+> usa una variante **clara neo-brutalista** (mismos acentos rosa/lima, bordes 2px y sombras duras
+> sobre superficie clara para datos densos). Toda la app está en español con i18n (`es` por
+> defecto, `en` listo). Tokens `--rk-*` ya viven en `:root` (`base.css`).
 
 ## 1. Marca
 
@@ -38,8 +40,11 @@ Principios:
 
 ## 3. Tokens
 
-Se exponen como custom properties con prefijo `--rk-`. En la landing viven scopeados bajo
-`.runark-landing`; cuando se migre la app pasarán a `:root`.
+Se exponen como custom properties con prefijo `--rk-`. La paleta **oscura** de la landing vive
+scopeada bajo `.runark-landing` (`runark_landing.css`). La paleta **clara** de la app interna
+vive en `:root` (`base.css`) y además repunta las abstracciones heredadas (`--color-accent`,
+`--color-bg`, `--color-text`…) a los tokens Runark, de modo que los componentes existentes
+heredan el rebrand sin reescribirse.
 
 ### Color — superficies (oscuro)
 
@@ -104,9 +109,18 @@ Se exponen como custom properties con prefijo `--rk-`. En la landing viven scope
 - **`.rk-cta-panel`** — bloque rosa a sangre con sombra dura lima y titular gigante en tinta.
 - Sin glows difusos, sin degradados, sin esquinas blandas.
 
-## 5. Pendiente (siguientes pasos del rebrand)
+## 5. Hecho · Pendiente
 
-1. Renombrar `Arrow → Runark` en layouts, `<title>`, mailer y `module Arrow`.
-2. Sustituir el ícono naranja (`#FF6B35→#F7931E`) por el mark rosa en ambos layouts.
-3. Migrar tokens `--rk-*` a `:root` y reescribir `base.css`/`button.css` sobre la paleta nueva.
-4. Decidir modo claro/oscuro para las pantallas internas (la app hoy es clara).
+**Hecho (rebrand de la app interna):**
+- `Arrow → Runark` en layouts, `<title>`, mailer e iconos PWA. El ícono naranja se sustituyó por
+  el mark rosa (`public/icon.svg` + `icon.png` regenerado, `manifest.json.erb` con `theme_color`
+  rosa). `module Arrow` (nombre interno de Ruby) **se mantiene** a propósito.
+- Tokens `--rk-*` en `:root` y paleta clara aplicada en `base.css`/`button.css` + componentes y
+  `application.css` (eliminado el CSS muerto de la landing antigua).
+- App en español con i18n (`es.yml`/`en.yml`, `default_locale :es`, fechas localizadas).
+
+**Pendiente:**
+1. Rellenar las traducciones de `en.yml` cuando se active el selector de idioma (hoy `en` replica
+   el árbol pero la app arranca en `es`).
+2. Modo oscuro opcional para pantallas internas (hoy solo clara; la landing ya es oscura).
+3. Migrar el copy de la landing (`home.html.erb`) a i18n (hoy en español hardcoded).

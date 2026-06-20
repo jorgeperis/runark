@@ -1,9 +1,9 @@
-Reset your password
+<%= t("passwords_mailer.reset.heading") %>
 ===================
 
-We received a request to reset the password for your Arrow account.
-Open the link below to choose a new one. This link expires in 15 minutes.
+<%= t("passwords_mailer.reset.intro") %>
+<%= t("passwords_mailer.reset.expires_text") %>
 
 <%= edit_password_url(@user.password_reset_token) %>
 
-If you didn't request this, you can safely ignore this email.
+<%= t("passwords_mailer.reset.ignore") %>

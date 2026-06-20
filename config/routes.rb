@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
+  put "locale/:locale" => "locales#update", as: :locale
 
   root "pages#home"
 
