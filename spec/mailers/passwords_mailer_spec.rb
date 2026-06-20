@@ -8,7 +8,7 @@ RSpec.describe PasswordsMailer, type: :mailer do
     it "addresses the user with the expected subject and sender" do
       expect(mail.to).to eq([ user.email_address ])
       expect(mail.subject).to eq("Restablece tu contraseña")
-      expect(mail.from).to eq([ "noreply@arrow.peris.me" ])
+      expect(mail.from).to eq([ "noreply@runark.peris.me" ])
     end
 
     it "includes a reset link to the edit password page" do

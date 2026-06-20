@@ -4,7 +4,7 @@ Personal preferences for this project (not shared with the team).
 
 ## Role
 
-Main contributor on a team. Familiar with the full stack — Rails, Hotwire, Kamal, and the Arrow codebase internals.
+Main contributor on a team. Familiar with the full stack — Rails, Hotwire, Kamal, and the Runark codebase internals.
 
 ## Communication style
 

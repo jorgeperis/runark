@@ -1,4 +1,4 @@
-name: "arrow"
+name: "runark"
 
 services:
   rails-app:
