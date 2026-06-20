@@ -2,10 +2,10 @@
 # <% require "dotenv"; Dotenv.load(".env") %>
 
 # Name of your application. Used to uniquely configure containers.
-service: arrow
+service: runark
 
 # Name of the container image.
-image: ghcr.io/jorgeperis/arrow
+image: ghcr.io/jorgeperis/runark
 
 # Deploy to these servers.
 servers:
@@ -22,7 +22,7 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
   ssl: true
-  host: arrow.peris.me
+  host: runark.peris.me
 
 # Credentials for your image host.
 registry:
@@ -49,7 +49,7 @@ env:
     # WEB_CONCURRENCY: 2
 
     # Match this to any external database server to configure Active Record correctly
-    # Use arrow-db for a db accessory server on same machine via local kamal docker network.
+    # Use runark-db for a db accessory server on same machine via local kamal docker network.
     # DB_HOST: 192.168.0.2
 
     # Log everything from Rails
@@ -65,6 +65,9 @@ aliases:
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
+# Volume name kept as "arrow_storage" on purpose: it holds the SQLite databases
+# and uploaded photos. Renaming it would bind a fresh empty volume and orphan the
+# data — migrate the volume on the server first if you want to rename it.
 volumes:
   - "arrow_storage:/rails/storage"
 
