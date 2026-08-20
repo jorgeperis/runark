@@ -67,7 +67,7 @@ group :test do
   gem "factory_bot_rails"
 end
 
-gem "css-zero", "~> 4.1.0"
+gem "css-zero", "~> 4.2.0"
 
 gem "dotenv", "~> 3.2"
 
