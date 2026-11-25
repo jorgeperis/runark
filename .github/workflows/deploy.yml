@@ -33,8 +33,13 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy
+        id: deploy
         run: kamal deploy
         env:
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           DEPLOY_SERVER_IP: ${{ secrets.DEPLOY_SERVER_IP }}
+
+      - name: Release lock if cancelled
+        if: cancelled() && steps.deploy.outcome == 'cancelled'
+        run: kamal lock release
