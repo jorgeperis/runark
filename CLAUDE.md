@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-- **Rails 8.1.3** / Ruby 3.4.2
+- **Rails 8.1.3** / Ruby 3.4.13
 - **Database**: SQLite in all environments (no PostgreSQL); Solid Queue, Solid Cache, and Solid Cable use separate SQLite databases — no Redis needed
 - **Frontend**: Hotwire (Turbo + Stimulus), Propshaft, Importmaps — no Node.js/Webpack build step
 - **CSS**: css-zero (lightweight utility CSS) — not Tailwind
