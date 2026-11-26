@@ -102,7 +102,7 @@ GEM
     crass (1.0.7)
     css-zero (4.3.0)
       railties (>= 8.0)
-    csv (3.3.6)
+    csv (3.3.7)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -133,7 +133,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    httparty (0.24.2)
+    httparty (0.25.1)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -287,7 +287,7 @@ GEM
     regexp_parser (2.10.0)
     reline (0.7.0)
       io-console (~> 0.5)
-    resend (1.17.0)
+    resend (1.20.0)
       base64
       httparty (>= 0.22.0)
     rspec-core (3.13.6)
